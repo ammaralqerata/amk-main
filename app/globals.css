@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  /* Palette — extracted from Pencil variables */
+  --color-bg: #ffffff;            /* page background (surface-primary) */
+  --color-fg: #000000;             /* text on bg (fg-primary) */
+  --color-fg-secondary: #333333;   /* fg-secondary */
+  --color-muted: #666666;          /* fg-muted */
+  --color-border: #cccccc;         /* border-subtle */
+  --color-inverse: #000000;        /* surface-inverse (black sections) */
+  --color-inverse-fg: #ffffff;     /* fg-inverse (white text on black) */
+  --color-accent: #00ff00;         /* pure green */
+
+  /* Typography — per-locale font variable is set by the <html> class at runtime */
+  --font-display: var(--font-active), ui-sans-serif, system-ui, sans-serif;
+  --font-body:    var(--font-active), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    var(--font-mono-loaded), "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Radii */
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+
+  /* Layout */
+  --container-max: 1200px;
+}
+
+/* Locale-aware font selection. --font-arabic and --font-latin are both injected
+   on <html> by the Next.js font loader; we pick the right one based on lang. */
+html[lang="ar"] {
+  --font-active: var(--font-arabic), "Readex Pro", ui-sans-serif, system-ui, sans-serif;
+}
+
+html[lang="en"] {
+  --font-active: var(--font-latin), "Geist", ui-sans-serif, system-ui, sans-serif;
+}
+
+html, body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}

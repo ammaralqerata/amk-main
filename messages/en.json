@@ -1,0 +1,135 @@
+{
+  "brand": {
+    "name": "AMMAR KERATA",
+    "plus": "+"
+  },
+  "nav": {
+    "home": "Home",
+    "portfolio": "Portfolio",
+    "plugins": "Plugins",
+    "contact": "Contact",
+    "switcherLabel": "العربية"
+  },
+  "meta": {
+    "title": "Ammar Kerata — AMK Creative",
+    "titleTemplate": "%s — AMK Creative",
+    "description": "Video editing, motion graphics, and creator tools by Ammar Kerata. Practical solutions for After Effects and Premiere Pro."
+  },
+  "hero": {
+    "eyebrow": "Video Editing · Motion Graphics · Tool Development",
+    "headlineLine1": "Video Editing,",
+    "headlineLine2": "Motion Graphics",
+    "headlineLine3": "& Creative Tools",
+    "description": "I produce videos and motion graphics, and develop plugins and tools that help content creators and editors speed up their workflow inside Adobe applications.",
+    "ctaView": "View My Work",
+    "ctaExplore": "Explore Plugins",
+    "portraitAlt": "Ammar Kerata portrait"
+  },
+  "about": {
+    "eyebrow": "About",
+    "p1": "I work in video editing and motion graphics, and I also develop custom tools and plugins that help content creators and editors speed up their workflow inside Adobe — especially After Effects and Premiere Pro.",
+    "p2": "I focus on building practical solutions that reduce manual steps, organize workflow, and save real time during production."
+  },
+  "services": {
+    "eyebrow": "Services",
+    "items": [
+      {
+        "number": "01",
+        "title": "Video Editing",
+        "description": "Professional video editing and post-production for modern content and platforms."
+      },
+      {
+        "number": "02",
+        "title": "Motion Graphics",
+        "description": "Creative motion design that combines imagination with precision to deliver clear visual storytelling."
+      },
+      {
+        "number": "03",
+        "title": "Adobe Plugin Dev",
+        "description": "Building custom plugins and extensions to speed up workflow inside After Effects and Premiere Pro."
+      },
+      {
+        "number": "04",
+        "title": "Workflow Optimization",
+        "description": "Analyzing and improving production workflows for content creators and editors to reduce wasted time."
+      }
+    ]
+  },
+  "toolsGrid": {
+    "eyebrow": "Plugins & Tools",
+    "heading": "Tools for Creators"
+  },
+  "portfolioPreview": {
+    "eyebrow": "Portfolio",
+    "heading": "Selected Work",
+    "viewAll": "View All"
+  },
+  "followMe": {
+    "eyebrow": "Connect",
+    "heading": "Follow Me",
+    "youtube": "YouTube",
+    "instagram": "Instagram"
+  },
+  "footer": {
+    "tagline": "Video Editing · Motion Graphics · Tool Development",
+    "pagesHeading": "PAGES",
+    "connectHeading": "CONNECT",
+    "rights": "© {year} Ammar Kerata. All rights reserved.",
+    "youtube": "YouTube",
+    "instagram": "Instagram",
+    "email": "Email",
+    "whatsapp": "WhatsApp"
+  },
+  "portfolioPage": {
+    "metaTitle": "Portfolio",
+    "metaDescription": "A collection of video editing and motion graphics work, with a focus on visual direction, rhythm, and practical execution for modern content.",
+    "eyebrow": "Portfolio",
+    "heading": "My Work",
+    "description": "A collection of video editing and motion graphics work, with a focus on visual direction, rhythm, and practical execution for modern content.",
+    "youtubeCta": "YouTube Channel",
+    "instagramCta": "Instagram"
+  },
+  "pluginsPage": {
+    "metaTitle": "Plugins",
+    "metaDescription": "A collection of plugins and tools designed to speed up work inside Adobe applications and improve production workflows.",
+    "eyebrow": "Plugins & Tools",
+    "headingLine1": "Tools for",
+    "headingLine2": "Content Creators",
+    "description": "A collection of plugins and tools designed to speed up work inside Adobe applications and improve production workflows for creators and editors."
+  },
+  "contactPage": {
+    "metaTitle": "Contact",
+    "metaDescription": "Reach out through any of the platforms below or send a direct message.",
+    "eyebrow": "Contact",
+    "heading": "Get In Touch",
+    "description": "Reach out through any of the platforms below or send a direct message.",
+    "platforms": {
+      "youtube": {
+        "name": "YouTube",
+        "description": "Follow my channel"
+      },
+      "instagram": {
+        "name": "Instagram",
+        "description": "My Instagram profile"
+      },
+      "email": {
+        "name": "Email",
+        "description": "ammaralqerata@gmail.com"
+      },
+      "whatsapp": {
+        "name": "WhatsApp",
+        "description": "+964 776 687 0565"
+      }
+    }
+  },
+  "toolCard": {
+    "details": "Details"
+  },
+  "toolPage": {
+    "badge": "Plugin",
+    "trialCta": "Free Trial",
+    "overviewEyebrow": "Overview",
+    "overviewHeading": "Everything you need to get {name} into your workflow.",
+    "overviewBody": "Full features list, pricing, and live demo are coming soon. For early access or any questions, reach out via the contact page."
+  }
+}

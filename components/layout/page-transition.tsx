@@ -1,0 +1,16 @@
+"use client";
+import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "@/i18n/navigation";
+import { pageTransition } from "@/lib/motion";
+import type { ReactNode } from "react";
+
+export function PageTransition({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div key={pathname} variants={pageTransition} initial="hidden" animate="visible" exit="exit">
+        {children}
+      </motion.div>
+    </AnimatePresence>
+  );
+}
