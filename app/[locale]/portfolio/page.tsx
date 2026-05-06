@@ -59,7 +59,7 @@ export default async function PortfolioPage({
       <section className="bg-bg text-fg">
         <div className="mx-auto max-w-[var(--container-max)] px-4 md:px-12 py-12 md:py-16 grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2">
           {WORKS.map((w) => (
-            <a key={w.src} href={w.href} target="_blank" rel="noopener noreferrer" className="relative block aspect-[16/10] rounded-xl overflow-hidden">
+            <a key={w.src} href={w.href} target="_blank" rel="noopener noreferrer" className="relative block aspect-[91/45] rounded-xl overflow-hidden">
               <Image src={w.src} alt={w.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover transition-transform duration-500 hover:scale-105" />
             </a>
           ))}

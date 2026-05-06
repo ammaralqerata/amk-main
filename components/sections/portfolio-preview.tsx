@@ -52,7 +52,7 @@ export function PortfolioPreview() {
               href={img.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative block aspect-[4/3] md:aspect-[3/4] lg:aspect-[4/5] rounded-xl overflow-hidden"
+              className="relative block aspect-[91/45] rounded-xl overflow-hidden"
             >
               <Image src={img.src} alt={img.alt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover transition-transform duration-500 hover:scale-105" />
             </motion.a>
