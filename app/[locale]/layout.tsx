@@ -48,6 +48,10 @@ export async function generateMetadata({
   return {
     title: { default: t("title"), template: t("titleTemplate") },
     description: t("description"),
+    icons: {
+      icon: [{ url: "/favicon.ico?v=2", sizes: "any" }],
+      shortcut: ["/favicon.ico?v=2"],
+    },
     alternates: {
       canonical: locale === routing.defaultLocale ? "/" : `/${locale}`,
       languages: {
