@@ -45,15 +45,41 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) return {};
   const t = await getTranslations({ locale, namespace: "meta" });
+  const title = t("title");
+  const description = t("description");
+  const canonical = locale === routing.defaultLocale ? "/" : `/${locale}`;
+
   return {
-    title: { default: t("title"), template: t("titleTemplate") },
-    description: t("description"),
+    metadataBase: new URL("https://ammar.kerata.net"),
+    title: { default: title, template: t("titleTemplate") },
+    description,
     icons: {
       icon: [{ url: "/favicon.ico?v=2", sizes: "any" }],
       shortcut: ["/favicon.ico?v=2"],
     },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      siteName: "AMK Creative",
+      type: "website",
+      images: [
+        {
+          url: "/og-image-v1.png",
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/og-image-v1.png"],
+    },
     alternates: {
-      canonical: locale === routing.defaultLocale ? "/" : `/${locale}`,
+      canonical,
       languages: {
         ar: "/",
         "en-US": "/en",
