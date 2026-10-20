@@ -2,6 +2,7 @@ import { Eyebrow } from "./eyebrow";
 import type { SectionMarkKind } from "@/components/ui/section-mark";
 import { SectionMark } from "@/components/ui/section-mark";
 import { riseDelay } from "@/lib/motion";
+import { HeroBackdrop } from "@/components/ui/hero-backdrop";
 
 export function PageHero({
   eyebrow,
@@ -17,9 +18,10 @@ export function PageHero({
   iconKind?: SectionMarkKind;
 }) {
   return (
-    <section className="bg-inverse text-inverse-fg">
+    <section className="relative overflow-hidden bg-inverse text-inverse-fg">
+      <HeroBackdrop />
       <div
-        className={`mx-auto max-w-[var(--container-max)] px-4 md:px-12 py-16 md:py-32 flex flex-col gap-6 ${align === "center" ? "items-center text-center" : ""}`}
+        className={`relative mx-auto max-w-[var(--container-max)] px-4 md:px-12 py-16 md:py-32 flex flex-col gap-6 ${align === "center" ? "items-center text-center" : ""}`}
       >
         <div className="rise-in" style={riseDelay(0)}>
           <Eyebrow tone="dark" icon={<SectionMark kind={iconKind} className="h-3.5 w-3.5" />}>{eyebrow}</Eyebrow>

@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Eyebrow } from "./eyebrow";
 import { SectionMark } from "@/components/ui/section-mark";
 import { riseDelay } from "@/lib/motion";
+import { HeroBackdrop } from "@/components/ui/hero-backdrop";
 
 export function Hero() {
   const t = useTranslations("hero");
   return (
     <section className="relative bg-inverse text-inverse-fg overflow-hidden">
+      <HeroBackdrop grid={false} />
       <div className="relative mx-auto max-w-[var(--container-max)] px-4 md:px-12 py-16 md:py-32 grid gap-8 md:gap-12 md:grid-cols-[1.1fr_1fr] md:items-center">
         <div className="flex flex-col gap-6">
           <div className="rise-in" style={riseDelay(0)}>

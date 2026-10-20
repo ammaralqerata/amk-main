@@ -31,7 +31,12 @@
   "about": {
     "eyebrow": "About",
     "p1": "I work in video editing and motion graphics, and I also develop custom tools and plugins that help content creators and editors speed up their workflow inside Adobe — especially After Effects and Premiere Pro.",
-    "p2": "I focus on building practical solutions that reduce manual steps, organize workflow, and save real time during production."
+    "p2": "I focus on building practical solutions that reduce manual steps, organize workflow, and save real time during production.",
+    "stats": {
+      "videos": "videos in the portfolio",
+      "plugins": "plugins and tools I built",
+      "fields": "production fields"
+    }
   },
   "services": {
     "eyebrow": "Services",
@@ -60,7 +65,10 @@
   },
   "toolsGrid": {
     "eyebrow": "Plugins & Tools",
-    "heading": "Tools for Creators"
+    "heading": "Tools for Creators",
+    "customTitle": "Need a custom plugin?",
+    "customBody": "I build plugins and tools tailored to your workflow inside After Effects and Premiere Pro — from idea to finished release.",
+    "customCta": "Tell me your idea"
   },
   "portfolioPreview": {
     "eyebrow": "Portfolio",

@@ -1,6 +1,7 @@
 import type { LocalizedTool, Tool, ToolScreenshot, ToolSlug } from "./types";
 import type { Locale } from "@/i18n/routing";
 import type { PlatformKind } from "@/components/ui/platform-mark";
+import { keepProductNamesTogether } from "@/lib/text";
 import { captions } from "./captions";
 import { itala } from "./itala";
 import { consol } from "./consol";
@@ -40,11 +41,6 @@ const TOOL_VIDEOS: Partial<Record<ToolSlug, string>> = {
   itala: "ztNBZQL5H5E",
   fadhakkir: "ONnMplI8pVM",
 };
-
-/** Keep multi-word Adobe product names on one line so they never split mid-name in Arabic text. */
-function keepProductNamesTogether(text: string): string {
-  return text.replace(/\b(After|Premiere|Media) (Effects|Pro|Encoder)\b/g, "$1\u00A0$2");
-}
 
 function tidyText<T extends Tool>(tool: T): T {
   return {

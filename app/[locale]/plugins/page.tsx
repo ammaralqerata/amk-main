@@ -32,7 +32,7 @@ export default async function PluginsPage({
         description={t("description")}
         iconKind="tools"
       />
-      <ToolsGrid />
+      <ToolsGrid showHeader={false} />
     </>
   );
 }

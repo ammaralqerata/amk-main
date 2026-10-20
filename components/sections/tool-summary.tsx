@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import { Check } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Eyebrow } from "./eyebrow";
 import { SectionMark } from "@/components/ui/section-mark";
@@ -67,10 +68,15 @@ export function ToolSummary({ tool }: { tool: Tool }) {
               <h3 className="font-display text-xl md:text-2xl uppercase">
                 {isArabic ? "أبرز الميزات" : "Key Features"}
               </h3>
-              <ul className="grid gap-3 sm:grid-cols-2">
+              <ul className="grid gap-2.5 sm:grid-cols-2">
                 {tool.highlights.map((feature) => (
-                  <li key={feature} className="flex gap-3 text-sm md:text-base leading-relaxed text-fg">
-                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-accent" />
+                  <li
+                    key={feature}
+                    className="flex items-start gap-3 rounded-2xl border border-border/70 bg-fg/[0.02] px-4 py-3.5 text-sm md:text-[15px] leading-relaxed text-fg transition-colors hover:border-fg/30"
+                  >
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-inverse text-accent">
+                      <Check aria-hidden className="h-3 w-3" strokeWidth={3} />
+                    </span>
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -82,11 +88,10 @@ export function ToolSummary({ tool }: { tool: Tool }) {
               <h3 className="font-display text-xl md:text-2xl uppercase">
                 {isArabic ? "مناسب لـ" : "Best For"}
               </h3>
-              <ul className="grid gap-3">
+              <ul className="flex flex-wrap gap-2">
                 {tool.audience.map((item) => (
-                  <li key={item} className="flex gap-3 text-sm md:text-base leading-relaxed text-fg">
-                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-accent" />
-                    <span>{item}</span>
+                  <li key={item} className="rounded-full border border-border px-4 py-2 text-sm text-fg">
+                    {item}
                   </li>
                 ))}
               </ul>

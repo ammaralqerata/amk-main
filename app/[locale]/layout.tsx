@@ -7,6 +7,7 @@ import "../globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { PageTransition } from "@/components/layout/page-transition";
+import { SpotlightTracker } from "@/components/ui/spotlight-tracker";
 import { routing } from "@/i18n/routing";
 import { pageMetadata, SITE_URL } from "@/lib/seo";
 
@@ -85,6 +86,7 @@ export default async function LocaleLayout({
             <PageTransition>{children}</PageTransition>
           </main>
           <SiteFooter />
+          <SpotlightTracker />
         </NextIntlClientProvider>
       </body>
     </html>

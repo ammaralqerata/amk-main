@@ -24,7 +24,7 @@ export function LanguageSwitcher() {
           { locale: other },
         );
       }}
-      className="font-display text-xs tracking-[0.18em] uppercase text-inverse-fg hover:text-accent transition-colors"
+      className="inline-flex min-h-[40px] items-center rounded-full border border-white/15 px-4 font-display text-xs tracking-[0.18em] uppercase text-inverse-fg transition-colors hover:border-accent hover:text-accent"
       aria-label={t("switchLanguage")}
     >
       {label}

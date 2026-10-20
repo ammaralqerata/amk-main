@@ -22,8 +22,9 @@ export function FollowMe() {
         whileInView="visible"
         viewport={{ once: true, margin: "-10%" }}
         variants={fadeRiseStagger}
-        className="mx-auto max-w-[var(--container-max)] bg-inverse text-inverse-fg rounded-2xl px-4 md:px-20 py-12 md:py-20 flex flex-col items-center gap-8 md:gap-10"
+        className="relative isolate mx-auto max-w-[var(--container-max)] overflow-hidden bg-inverse text-inverse-fg rounded-3xl px-4 md:px-20 py-12 md:py-20 flex flex-col items-center gap-8 md:gap-10"
       >
+        <div aria-hidden className="aurora -z-10 opacity-80" />
         <motion.div variants={fadeRise}>
           <Eyebrow tone="dark" icon={<SectionMark kind="contact" className="h-3.5 w-3.5" />}>{t("eyebrow")}</Eyebrow>
         </motion.div>
@@ -37,7 +38,7 @@ export function FollowMe() {
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 rounded-xl px-8 py-4 md:px-10 md:py-4 border border-[var(--color-fg-secondary)] text-inverse-fg hover:border-accent transition-colors min-w-[200px] min-h-[52px]"
+              className="glass inline-flex items-center justify-center gap-3 rounded-full px-8 py-4 md:px-10 text-inverse-fg transition-colors hover:border-accent/60 hover:text-accent min-w-[200px] min-h-[52px]"
             >
               <SocialIcon platform={s.platform} className="h-5 w-5" />
               <span className="font-body text-base font-semibold">{t(s.platform)}</span>

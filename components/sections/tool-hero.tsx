@@ -5,15 +5,17 @@ import { PlatformMark } from "@/components/ui/platform-mark";
 import { SectionMark } from "@/components/ui/section-mark";
 import { Eyebrow } from "./eyebrow";
 import { riseDelay } from "@/lib/motion";
+import { HeroBackdrop } from "@/components/ui/hero-backdrop";
 import type { Tool } from "@/content/tools/types";
 
 export function ToolHero({ tool }: { tool: Tool }) {
   const t = useTranslations("toolPage");
 
   return (
-    <section className="bg-inverse text-inverse-fg">
+    <section className="relative overflow-hidden bg-inverse text-inverse-fg">
+      <HeroBackdrop />
       <div
-        className="mx-auto grid max-w-[var(--container-max)] gap-8 md:gap-12 px-4 py-16 md:px-12 md:py-28 lg:grid-cols-[0.9fr_1.1fr] lg:items-center"
+        className="relative mx-auto grid max-w-[var(--container-max)] gap-8 md:gap-12 px-4 py-16 md:px-12 md:py-28 lg:grid-cols-[0.9fr_1.1fr] lg:items-center"
       >
         <div className="flex flex-col gap-6">
           <div className="rise-in" style={riseDelay(0)}>
