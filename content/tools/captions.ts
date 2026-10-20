@@ -5,7 +5,7 @@ export const captions: LocalizedTool = {
     slug: "captions",
     name: "AMK Captions",
     tagline: "حوّل الصوت إلى كابشنز جاهزة ونسّقها وحرّكها داخل Adobe.",
-    description: "إضافة احترافية لـ Adobe Premiere Pro وAfter Effects تساعدك على تحويل الصوت إلى كابشنز جاهزة، تنسيق النصوص، تطبيق الحركات، وتسريع إنتاج الترجمة والمحتوى القصير من داخل برامج Adobe.",
+    description: "إضافة احترافية لـ Adobe Premiere Pro و After Effects تساعدك على تحويل الصوت إلى كابشنز جاهزة، تنسيق النصوص، تطبيق الحركات، وتسريع إنتاج الترجمة والمحتوى القصير من داخل برامج Adobe.",
     fullDescription: "AMK Captions صُممت لصنّاع المحتوى والمونتيرين الذين يريدون إنشاء كابشنز بسرعة واحترافية بدون الخروج من بيئة العمل. تتيح تفريغ الصوت إلى نصوص، دعم لغات متعددة، تنسيق الكابشنز، تطبيق حركات جاهزة، واستيراد سكربتات خارجية بسهولة.",
     platforms: "Premiere Pro · After Effects",
     features: [],
@@ -33,7 +33,7 @@ export const captions: LocalizedTool = {
     cta: { label: "تحميل", href: "#" },
     meta: {
       title: "AMK Captions",
-      description: "إضافة احترافية لـ Premiere Pro وAfter Effects لتحويل الصوت إلى كابشنز جاهزة مع تنسيق وحركات.",
+      description: "إضافة احترافية لـ Premiere Pro و After Effects لتحويل الصوت إلى كابشنز جاهزة مع تنسيق وحركات.",
     },
   },
   en: {

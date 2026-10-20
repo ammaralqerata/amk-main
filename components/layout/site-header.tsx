@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
-import { SectionMark } from "@/components/ui/section-mark";
+import { BrandLogo } from "@/components/ui/brand-logo";
 import { LanguageSwitcher } from "./language-switcher";
 import { Menu, X } from "lucide-react";
 
@@ -23,15 +23,16 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 bg-inverse text-inverse-fg">
       <div className="mx-auto max-w-[var(--container-max)] flex items-center justify-between px-4 md:px-12 h-[60px] md:h-[72px]">
-        <Link href="/" className="flex items-center gap-2 min-w-0" onClick={() => setMenuOpen(false)}>
-          <SectionMark kind="brand" className="h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
+        <Link href="/" className="flex items-center gap-3 min-w-0" onClick={() => setMenuOpen(false)}>
+          <BrandLogo className="h-8 md:h-9" />
           <span className="font-display text-sm md:text-lg tracking-[0.125em] truncate">{tBrand("name")}</span>
         </Link>
 
         <button
           className="md:hidden p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? "إغلاق القائمة" : "فتح القائمة"}
+          aria-label={menuOpen ? tNav("closeMenu") : tNav("openMenu")}
+          aria-expanded={menuOpen}
         >
           {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>

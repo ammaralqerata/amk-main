@@ -5,7 +5,7 @@ export const graph: LocalizedTool = {
     slug: "graph",
     name: "AMK Graph",
     tagline: "تحكّم أسهل بالكيفريمات والمنحنيات من واجهة واحدة.",
-    description: "إضافة عملية لتسهيل التحكم بالكيفريمات داخل After Effects وPremiere Pro من خلال واجهة واضحة وسريعة.",
+    description: "إضافة عملية لتسهيل التحكم بالكيفريمات داخل After Effects و Premiere Pro من خلال واجهة واضحة وسريعة.",
     fullDescription: "AMK Graph تمنحك طريقة أسهل لإدارة الحركة والمنحنيات بدون التنقل المرهق بين الأدوات التقليدية. صُممت لتسريع العمل على الأنيميشن، الموشن جرافيك، وتعديلات الحركة الدقيقة.",
     platforms: "After Effects · Premiere Pro",
     features: [],
@@ -28,7 +28,7 @@ export const graph: LocalizedTool = {
     cta: { label: "تحميل", href: "#" },
     meta: {
       title: "AMK Graph",
-      description: "إضافة للتحكم بالكيفريمات والمنحنيات داخل After Effects وPremiere Pro.",
+      description: "إضافة للتحكم بالكيفريمات والمنحنيات داخل After Effects و Premiere Pro.",
     },
   },
   en: {

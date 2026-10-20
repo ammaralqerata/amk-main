@@ -3,9 +3,11 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { getTool, TOOL_SLUGS } from "@/content/tools";
 import { ToolHero } from "@/components/sections/tool-hero";
+import { ToolDemoVideo } from "@/components/sections/tool-demo-video";
 import { ToolScreenshots } from "@/components/sections/tool-screenshots";
 import { ToolSummary } from "@/components/sections/tool-summary";
 import { routing, type Locale } from "@/i18n/routing";
+import { pageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
@@ -21,7 +23,7 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const tool = getTool(slug, locale);
   if (!tool) return {};
-  return { title: tool.meta.title, description: tool.meta.description };
+  return pageMetadata({ locale, path: `/plugins/${slug}`, title: tool.meta.title, description: tool.meta.description });
 }
 
 export default async function ToolPage({
@@ -36,6 +38,7 @@ export default async function ToolPage({
   return (
     <>
       <ToolHero tool={tool} />
+      <ToolDemoVideo tool={tool} />
       <ToolScreenshots tool={tool} />
       <ToolSummary tool={tool} />
     </>

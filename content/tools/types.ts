@@ -38,6 +38,8 @@ export type Tool = {
   highlights?: string[];
   audience?: string[];
   demo?: ToolDemo;
+  /** YouTube id of a promo/demo video, played on the plugin page. */
+  demoVideoId?: string;
   cta: { label: string; href: string };
   meta: { title: string; description: string };
 };

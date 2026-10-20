@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ToolsGrid } from "@/components/sections/tools-grid";
 import { PageHero } from "@/components/sections/page-hero";
 import type { Locale } from "@/i18n/routing";
+import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -11,7 +12,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pluginsPage" });
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return pageMetadata({ locale, path: "/plugins", title: t("metaTitle"), description: t("metaDescription") });
 }
 
 export default async function PluginsPage({

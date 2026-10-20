@@ -1,32 +1,20 @@
 "use client";
-import Image from "next/image";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Eyebrow } from "./eyebrow";
 import { SectionMark } from "@/components/ui/section-mark";
+import { getFeaturedVideos } from "@/content/videos";
 import { fadeRise, fadeRiseStagger } from "@/lib/motion";
+import { VideoCard } from "./video-card";
+import { VideoPlayerModal } from "./video-player-modal";
 
-const IMAGES = [
-  {
-    src: "/portfolio/motion-graphics-maps.png",
-    alt: "Motion graphics and maps",
-    href: "https://youtube.com/playlist?list=PLjabAHkQbBA3Wi6oHiPiWDNKFMcu_tx7m&si=7fWvEGETvGVsFdfH",
-  },
-  {
-    src: "/portfolio/montage-documentary.png",
-    alt: "Montage and documentary work",
-    href: "https://www.youtube.com/@ReLevantHistoryy/featured",
-  },
-  {
-    src: "/portfolio/creative-content.png",
-    alt: "Creative content production",
-    href: "https://youtube.com/playlist?list=PLjabAHkQbBA11qT_O7g8TaHhdw1bNkqgL&si=Mj4VIotFDBUUUHsF",
-  },
-];
+const FEATURED = getFeaturedVideos();
 
 export function PortfolioPreview() {
   const t = useTranslations("portfolioPreview");
+  const [playing, setPlaying] = useState<number | null>(null);
 
   return (
     <motion.section
@@ -44,21 +32,25 @@ export function PortfolioPreview() {
           </div>
           <Button href="/portfolio" variant="ghost">{t("viewAll")}</Button>
         </motion.header>
-        <div className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {IMAGES.map((img) => (
-            <motion.a
-              variants={fadeRise}
-              key={img.src}
-              href={img.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative block aspect-[91/45] rounded-xl overflow-hidden"
-            >
-              <Image src={img.src} alt={img.alt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover transition-transform duration-500 hover:scale-105" />
-            </motion.a>
+        <div className="grid gap-x-4 gap-y-8 md:gap-x-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {FEATURED.map((video, i) => (
+            <motion.div variants={fadeRise} key={video.id}>
+              <VideoCard
+                video={video}
+                showCategory
+                onPlay={() => setPlaying(i)}
+                sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
+              />
+            </motion.div>
           ))}
         </div>
       </div>
+      <VideoPlayerModal
+        videos={FEATURED}
+        index={playing}
+        onClose={() => setPlaying(null)}
+        onIndexChange={setPlaying}
+      />
     </motion.section>
   );
 }

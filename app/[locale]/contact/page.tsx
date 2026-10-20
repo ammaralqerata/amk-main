@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { PageHero } from "@/components/sections/page-hero";
 import { SocialIcon } from "@/components/ui/social-icons";
 import type { Locale } from "@/i18n/routing";
+import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -13,7 +14,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "contactPage" });
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return pageMetadata({ locale, path: "/contact", title: t("metaTitle"), description: t("metaDescription") });
 }
 
 type PlatformKey = "youtube" | "instagram" | "email" | "whatsapp";

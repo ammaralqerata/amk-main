@@ -4,13 +4,13 @@ export const consol: LocalizedTool = {
   ar: {
     slug: "consol",
     name: "AMK Consol",
-    tagline: "وصول أسرع إلى Effects وTransitions داخل Premiere Pro.",
-    description: "إضافة ذكية لـ Adobe Premiere Pro تمنحك وصولًا أسرع إلى Effects وTransitions مع نظام مفضلة واختصارات لتسريع المونتاج.",
+    tagline: "وصول أسرع إلى Effects و Transitions داخل Premiere Pro.",
+    description: "إضافة ذكية لـ Adobe Premiere Pro تمنحك وصولًا أسرع إلى Effects و Transitions مع نظام مفضلة واختصارات لتسريع المونتاج.",
     fullDescription: "AMK Consol تقلل الوقت الضائع في البحث داخل Premiere Pro عبر واجهة سريعة وعملية. ابحث عن أي Effect أو Transition، طبّقه فورًا على الكليب، واحفظ أدواتك المفضلة مع اختصارات مخصصة.",
     platforms: "Premiere Pro",
     features: [],
     highlights: [
-      "بحث سريع عن Effects وTransitions",
+      "بحث سريع عن Effects و Transitions",
       "تطبيق مباشر على الكليب المحدد",
       "حفظ العناصر كمفضلة",
       "اختصارات مخصصة",
@@ -30,7 +30,7 @@ export const consol: LocalizedTool = {
     cta: { label: "تحميل", href: "#" },
     meta: {
       title: "AMK Consol",
-      description: "إضافة Premiere Pro للوصول السريع إلى Effects وTransitions مع المفضلة والاختصارات.",
+      description: "إضافة Premiere Pro للوصول السريع إلى Effects و Transitions مع المفضلة والاختصارات.",
     },
   },
   en: {

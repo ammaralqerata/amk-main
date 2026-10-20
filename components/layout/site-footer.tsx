@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { SectionMark } from "@/components/ui/section-mark";
+import { BrandLogo } from "@/components/ui/brand-logo";
 import { SocialIcon } from "@/components/ui/social-icons";
 
 type FooterLink = {
@@ -40,6 +40,7 @@ export function SiteFooter() {
     { href: "/", label: tNav("home") },
     { href: "/portfolio", label: tNav("portfolio") },
     { href: "/plugins", label: tNav("plugins") },
+    { href: "/contact", label: tNav("contact") },
   ];
 
   const connect: FooterLink[] = [
@@ -54,8 +55,8 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[var(--container-max)] flex flex-col gap-8 px-4 md:px-12 py-8 md:py-12">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="flex flex-col gap-3">
-            <Link href="/" className="flex items-center gap-2">
-              <SectionMark kind="brand" className="h-4 w-4 md:h-5 md:w-5" />
+            <Link href="/" className="flex items-center gap-3">
+              <BrandLogo className="h-9 md:h-10" />
               <span className="font-display text-sm md:text-base tracking-[0.125em]">{tBrand("name")}</span>
             </Link>
             <p className="text-xs md:text-[13px] text-muted">

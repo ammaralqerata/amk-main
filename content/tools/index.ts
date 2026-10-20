@@ -35,6 +35,27 @@ const PLATFORM_KINDS: Record<ToolSlug, PlatformKind> = {
   fadhakkir: "desktop-app",
 };
 
+/** Promo videos from the YouTube channel (ids also listed in content/videos.ts). */
+const TOOL_VIDEOS: Partial<Record<ToolSlug, string>> = {
+  itala: "ztNBZQL5H5E",
+  fadhakkir: "ONnMplI8pVM",
+};
+
+/** Keep multi-word Adobe product names on one line so they never split mid-name in Arabic text. */
+function keepProductNamesTogether(text: string): string {
+  return text.replace(/\b(After|Premiere|Media) (Effects|Pro|Encoder)\b/g, "$1\u00A0$2");
+}
+
+function tidyText<T extends Tool>(tool: T): T {
+  return {
+    ...tool,
+    tagline: keepProductNamesTogether(tool.tagline),
+    description: keepProductNamesTogether(tool.description),
+    fullDescription: tool.fullDescription && keepProductNamesTogether(tool.fullDescription),
+    highlights: tool.highlights?.map(keepProductNamesTogether),
+  };
+}
+
 const TOOL_SCREENSHOTS: Partial<Record<ToolSlug, ToolScreenshot[]>> = {
   captions: [
     {
@@ -174,8 +195,9 @@ export function getTool(slug: string, locale: Locale): Tool | undefined {
   const screenshots = TOOL_SCREENSHOTS[tool.slug];
 
   return {
-    ...tool,
+    ...tidyText(tool),
     name: ENGLISH_TOOL_NAMES[tool.slug],
+    demoVideoId: tool.demoVideoId ?? TOOL_VIDEOS[tool.slug],
     platformKind: PLATFORM_KINDS[tool.slug],
     heroImage: tool.heroImage ?? screenshots?.[0]?.src,
     screenshots,

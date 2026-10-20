@@ -8,7 +8,10 @@
     "portfolio": "Portfolio",
     "plugins": "Plugins",
     "contact": "Contact",
-    "switcherLabel": "العربية"
+    "switcherLabel": "العربية",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "switchLanguage": "Switch to Arabic"
   },
   "meta": {
     "title": "Ammar Kerata — AMK Creative",
@@ -89,6 +92,23 @@
     "youtubeCta": "YouTube Channel",
     "instagramCta": "Instagram"
   },
+  "videos": {
+    "all": "All",
+    "filterLabel": "Filter work by type",
+    "play": "Play",
+    "close": "Close",
+    "previous": "Previous video",
+    "next": "Next video",
+    "watchOnYoutube": "Watch on YouTube",
+    "showMore": "Show {count} more",
+    "showLess": "Show less",
+    "categories": {
+      "ads": "Ads & Motion",
+      "documentary": "Documentary",
+      "creative": "Creative Content",
+      "shorts": "Reels & Shorts"
+    }
+  },
   "pluginsPage": {
     "metaTitle": "Plugins",
     "metaDescription": "A collection of plugins and tools designed to speed up work inside Adobe applications and improve production workflows.",
@@ -130,6 +150,11 @@
     "trialCta": "Free Trial",
     "overviewEyebrow": "Overview",
     "overviewHeading": "Everything you need to get {name} into your workflow.",
-    "overviewBody": "Full features list, pricing, and live demo are coming soon. For early access or any questions, reach out via the contact page."
+    "overviewBody": "Full features list, pricing, and live demo are coming soon. For early access or any questions, reach out via the contact page.",
+    "demoEyebrow": "Watch it",
+    "demoHeading": "{name} in action",
+    "demoBody": "A short video showing how the plugin saves you time in a real workflow.",
+    "demoCta": "Play video",
+    "heroImageAlt": "{name} interface preview"
   }
 }

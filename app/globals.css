@@ -45,3 +45,19 @@ html, body {
   font-weight: 600;
   letter-spacing: -0.01em;
 }
+
+/* Entrance animation for above-the-fold content. Pure CSS so the first screen
+   is painted (and animates) before JavaScript loads. Stagger with --i. */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.rise-in {
+  animation: rise-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 80ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise-in { animation: none; }
+}

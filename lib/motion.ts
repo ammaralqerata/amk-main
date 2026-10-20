@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Variants } from "framer-motion";
 
 export const fadeRise: Variants = {
@@ -20,3 +21,8 @@ export const pageTransition: Variants = {
   visible: { opacity: 1, transition: { duration: 0.3 } },
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
+
+/** Stagger index for the CSS `.rise-in` entrance animation (see globals.css). */
+export function riseDelay(i: number): CSSProperties {
+  return { "--i": i } as CSSProperties;
+}

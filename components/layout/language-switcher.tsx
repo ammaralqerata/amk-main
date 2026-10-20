@@ -25,7 +25,7 @@ export function LanguageSwitcher() {
         );
       }}
       className="font-display text-xs tracking-[0.18em] uppercase text-inverse-fg hover:text-accent transition-colors"
-      aria-label={`Switch language to ${other === "ar" ? "Arabic" : "English"}`}
+      aria-label={t("switchLanguage")}
     >
       {label}
     </button>
