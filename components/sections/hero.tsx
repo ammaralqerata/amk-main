@@ -5,12 +5,14 @@ import { Eyebrow } from "./eyebrow";
 import { SectionMark } from "@/components/ui/section-mark";
 import { riseDelay } from "@/lib/motion";
 import { HeroBackdrop } from "@/components/ui/hero-backdrop";
+import { SHOWREEL } from "@/content/showreel";
+import { ShowreelBackground } from "./showreel-background";
 
 export function Hero() {
   const t = useTranslations("hero");
   return (
     <section className="relative bg-inverse text-inverse-fg overflow-hidden">
-      <HeroBackdrop grid={false} />
+      {SHOWREEL ? <ShowreelBackground reel={SHOWREEL} /> : <HeroBackdrop grid={false} />}
       <div className="relative mx-auto max-w-[var(--container-max)] px-4 md:px-12 py-16 md:py-32 grid gap-8 md:gap-12 md:grid-cols-[1.1fr_1fr] md:items-center">
         <div className="flex flex-col gap-6">
           <div className="rise-in" style={riseDelay(0)}>
@@ -24,7 +26,7 @@ export function Hero() {
             {t("headlineLine2")}<br />
             {t("headlineLine3")}
           </h1>
-          <p className="rise-in text-muted text-base md:text-[17px] leading-relaxed max-w-[520px]" style={riseDelay(2)}>
+          <p className="rise-in text-white/70 text-base md:text-[17px] leading-relaxed max-w-[520px]" style={riseDelay(2)}>
             {t("description")}
           </p>
           <div className="rise-in flex flex-wrap gap-3 mt-2" style={riseDelay(3)}>
@@ -34,7 +36,7 @@ export function Hero() {
         </div>
 
         <div
-          className="rise-in relative aspect-[520/600] max-w-[520px] w-full justify-self-center md:justify-self-end rounded-xl overflow-hidden"
+          className="rise-in relative aspect-[520/600] max-w-[520px] w-full justify-self-center md:justify-self-end rounded-2xl overflow-hidden ring-1 ring-white/10 shadow-2xl shadow-black/60"
           style={riseDelay(4)}
         >
           <Image

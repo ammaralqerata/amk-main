@@ -16,13 +16,13 @@ export function FollowMe() {
   ];
 
   return (
-    <section className="px-4 md:px-12 pb-16">
+    <section className="bg-inverse px-4 md:px-12 pb-16 md:pb-24">
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-10%" }}
         variants={fadeRiseStagger}
-        className="relative isolate mx-auto max-w-[var(--container-max)] overflow-hidden bg-inverse text-inverse-fg rounded-3xl px-4 md:px-20 py-12 md:py-20 flex flex-col items-center gap-8 md:gap-10"
+        className="relative isolate mx-auto max-w-[var(--container-max)] overflow-hidden border border-white/10 bg-white/[0.02] text-inverse-fg rounded-3xl px-4 md:px-20 py-12 md:py-20 flex flex-col items-center gap-8 md:gap-10"
       >
         <div aria-hidden className="aurora -z-10 opacity-80" />
         <motion.div variants={fadeRise}>

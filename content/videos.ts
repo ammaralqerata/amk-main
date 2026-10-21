@@ -72,8 +72,17 @@ export const VIDEOS: Video[] = [
   { id: "c4M29gege9U", category: "shorts", title: "واقي الشمس" },
 ];
 
-/** Shown on the home page, in this order. */
-export const FEATURED_VIDEO_IDS = ["UZewDB18_ho", "P1uClg_dAus", "mBZqKUAaj0g"];
+/** Home page carousel, in this order. All have a high-res (maxres) YouTube thumbnail. */
+export const FEATURED_VIDEO_IDS = [
+  "UZewDB18_ho",
+  "P1uClg_dAus",
+  "5L-x90s5SmI",
+  "yGjVj9rxCiQ",
+  "mBZqKUAaj0g",
+  "_a7cJPGj_tY",
+  "VV7PQzcUa7U",
+  "Q-mWHjpIhcU",
+];
 
 export function getVideoTitle(video: Video, locale: Locale): string {
   return typeof video.title === "string" ? video.title : video.title[locale];
@@ -93,8 +102,9 @@ export function getFeaturedVideos(): Video[] {
   );
 }
 
-export function getThumbnailUrl(id: string): string {
-  return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+/** "hq" (480×360) always exists; "max" (1280×720) exists for most landscape uploads. */
+export function getThumbnailUrl(id: string, size: "hq" | "max" = "hq"): string {
+  return `https://i.ytimg.com/vi/${id}/${size === "max" ? "maxresdefault" : "hqdefault"}.jpg`;
 }
 
 export function getEmbedUrl(id: string): string {

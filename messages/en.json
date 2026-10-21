@@ -26,7 +26,9 @@
     "description": "I produce videos and motion graphics, and develop plugins and tools that help content creators and editors speed up their workflow inside Adobe applications.",
     "ctaView": "View My Work",
     "ctaExplore": "Explore Plugins",
-    "portraitAlt": "Ammar Kerata portrait"
+    "portraitAlt": "Ammar Kerata portrait",
+    "playReel": "Play showreel",
+    "pauseReel": "Pause showreel"
   },
   "about": {
     "eyebrow": "About",
@@ -115,7 +117,9 @@
       "documentary": "Documentary",
       "creative": "Creative Content",
       "shorts": "Reels & Shorts"
-    }
+    },
+    "carouselLabel": "Selected work",
+    "goTo": "Show video {n}"
   },
   "pluginsPage": {
     "metaTitle": "Plugins",

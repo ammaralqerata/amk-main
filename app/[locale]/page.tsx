@@ -18,9 +18,9 @@ export default async function HomePage({
     <>
       <Hero />
       <About />
+      <PortfolioPreview />
       <Services />
       <ToolsGrid />
-      <PortfolioPreview />
       <FollowMe />
     </>
   );

@@ -121,7 +121,6 @@ export function VideoPlayerModal({
                 src={getEmbedUrl(video.id)}
                 title={getVideoTitle(video, locale)}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
-                allowFullScreen
                 className="absolute inset-0 h-full w-full"
               />
             </motion.div>
