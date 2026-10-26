@@ -54,8 +54,12 @@ export async function generateMetadata({
     metadataBase: new URL(SITE_URL),
     title: { default: title, template: t("titleTemplate") },
     icons: {
-      icon: [{ url: "/favicon.ico?v=2", sizes: "any" }],
-      shortcut: ["/favicon.ico?v=2"],
+      icon: [
+        { url: "/favicon.ico?v=3", sizes: "any" },
+        { url: "/brand/icon-512.png", sizes: "512x512", type: "image/png" },
+      ],
+      shortcut: ["/favicon.ico?v=3"],
+      apple: [{ url: "/brand/apple-touch-icon.png", sizes: "180x180" }],
     },
   };
 }

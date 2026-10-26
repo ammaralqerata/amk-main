@@ -56,7 +56,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="flex flex-col gap-3">
             <Link href="/" className="flex items-center gap-3">
-              <BrandLogo className="h-9 md:h-10" />
+              <BrandLogo className="h-7 md:h-8" />
               <span className="font-display text-sm md:text-base tracking-[0.125em]">{tBrand("name")}</span>
             </Link>
             <p className="text-xs md:text-[13px] text-muted">

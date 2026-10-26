@@ -39,7 +39,7 @@ export function SiteHeader() {
       <header className="sticky top-0 z-40 border-b border-white/[0.08] bg-black/85 text-inverse-fg backdrop-blur-xl backdrop-saturate-150">
         <div className="mx-auto max-w-[var(--container-max)] flex items-center justify-between px-4 md:px-12 h-[60px] md:h-[72px]">
           <Link href="/" className="flex items-center gap-3 min-w-0" onClick={() => setMenuOpen(false)}>
-            <BrandLogo className="h-8 md:h-9" />
+            <BrandLogo className="h-6 md:h-7" />
             <span className="font-display text-sm md:text-lg tracking-[0.125em] truncate">{tBrand("name")}</span>
           </Link>
 
