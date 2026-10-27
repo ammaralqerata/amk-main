@@ -11,7 +11,9 @@
     "switcherLabel": "العربية",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "switchLanguage": "Switch to Arabic"
+    "switchLanguage": "Switch to Arabic",
+    "whatsappCta": "Contact us",
+    "whatsappShort": "Contact"
   },
   "meta": {
     "title": "Ammar Kerata — AMK Creative",
@@ -28,12 +30,7 @@
     "ctaExplore": "Explore Plugins",
     "portraitAlt": "Ammar Kerata portrait",
     "playReel": "Play showreel",
-    "pauseReel": "Pause showreel"
-  },
-  "about": {
-    "eyebrow": "About",
-    "p1": "I work in video editing and motion graphics, and I also develop custom tools and plugins that help content creators and editors speed up their workflow inside Adobe — especially After Effects and Premiere Pro.",
-    "p2": "I focus on building practical solutions that reduce manual steps, organize workflow, and save real time during production.",
+    "pauseReel": "Pause showreel",
     "stats": {
       "videos": "videos in the portfolio",
       "plugins": "plugins and tools I built",
@@ -42,6 +39,7 @@
   },
   "services": {
     "eyebrow": "Services",
+    "heading": "What I Do",
     "items": [
       {
         "number": "01",
@@ -56,32 +54,23 @@
       {
         "number": "03",
         "title": "Adobe Plugin Dev",
-        "description": "Building custom plugins and extensions to speed up workflow inside After Effects and Premiere Pro."
+        "description": "Custom plugins for After Effects and Premiere Pro, plus workflow tuning that saves real time in production."
       },
       {
         "number": "04",
-        "title": "Workflow Optimization",
-        "description": "Analyzing and improving production workflows for content creators and editors to reduce wasted time."
+        "title": "AI Video",
+        "description": "Scenes and ads made with AI tools, then edited and composited with a professional finish."
       }
     ]
   },
   "toolsGrid": {
     "eyebrow": "Plugins & Tools",
-    "heading": "Tools for Creators",
-    "customTitle": "Need a custom plugin?",
-    "customBody": "I build plugins and tools tailored to your workflow inside After Effects and Premiere Pro — from idea to finished release.",
-    "customCta": "Tell me your idea"
+    "heading": "Tools for Creators"
   },
   "portfolioPreview": {
     "eyebrow": "Portfolio",
     "heading": "Selected Work",
     "viewAll": "View All"
-  },
-  "followMe": {
-    "eyebrow": "Connect",
-    "heading": "Follow Me",
-    "youtube": "YouTube",
-    "instagram": "Instagram"
   },
   "footer": {
     "tagline": "Video Editing · Motion Graphics · Tool Development",
@@ -116,10 +105,18 @@
       "ads": "Ads & Motion",
       "documentary": "Documentary",
       "creative": "Creative Content",
+      "realEstate": "Real Estate",
+      "ai": "AI",
       "shorts": "Reels & Shorts"
     },
     "carouselLabel": "Selected work",
-    "goTo": "Show video {n}"
+    "goTo": "Show video {n}",
+    "soon": "Soon",
+    "comingSoon": {
+      "title": "Coming soon",
+      "body": "“{category}” work is being prepared and will be added here soon. Have a project in this field?",
+      "cta": "Message me on WhatsApp"
+    }
   },
   "pluginsPage": {
     "metaTitle": "Plugins",
@@ -168,5 +165,64 @@
     "demoBody": "A short video showing how the plugin saves you time in a real workflow.",
     "demoCta": "Play video",
     "heroImageAlt": "{name} interface preview"
+  },
+  "pluginRequest": {
+    "title": "Need a custom plugin?",
+    "body": "Describe your idea in a few lines and send it on WhatsApp or by email — I build plugins around your workflow inside After Effects and Premiere Pro, from idea to finished release.",
+    "screenshotsHint": "Got screenshots or examples? Attach them in the WhatsApp chat or email once it opens.",
+    "nameLabel": "Your name",
+    "namePlaceholder": "e.g. Alex",
+    "appLabel": "Which app?",
+    "apps": {
+      "afterEffects": "After Effects",
+      "premiere": "Premiere Pro",
+      "both": "Both"
+    },
+    "ideaLabel": "What should the plugin do?",
+    "ideaPlaceholder": "Two lines are enough: what do you do by hand today that you want automated?",
+    "ideaMissing": "Write your idea first.",
+    "sendWhatsapp": "Send on WhatsApp",
+    "sendEmail": "Send by email",
+    "message": {
+      "greeting": "Hi Ammar, I have a plugin idea 👇",
+      "name": "Name",
+      "app": "App",
+      "idea": "Idea",
+      "screenshots": "(I'll attach screenshots here)",
+      "subject": "Custom plugin request"
+    }
+  },
+  "clients": {
+    "eyebrow": "Clients",
+    "heading": "Worked With",
+    "testimonials": {
+      "heading": "What Clients Say",
+      "voiceNote": "Voice note",
+      "play": "Play",
+      "pause": "Pause",
+      "seek": "Playback position",
+      "showTranscript": "Read the full transcript",
+      "hideTranscript": "Hide transcript",
+      "viewOriginal": "See the original message",
+      "close": "Close",
+      "originalAlt": "Original message from {name}"
+    }
+  },
+  "finalCta": {
+    "eyebrow": "Contact",
+    "heading": "Got a project? Let's talk",
+    "body": "An ad, reels, a documentary or a custom plugin — tell me your idea on WhatsApp and we'll plan it together.",
+    "whatsapp": "Chat on WhatsApp",
+    "email": "Email me",
+    "follow": "Follow",
+    "youtube": "YouTube",
+    "instagram": "Instagram"
+  },
+  "floating": {
+    "whatsapp": "Chat with me on WhatsApp",
+    "bubble": "Talk to me 👋",
+    "closeBubble": "Close",
+    "backToTop": "Back to top",
+    "whatsappMessage": "Hi Ammar, I saw your website and would like to talk about a project."
   }
 }

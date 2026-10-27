@@ -50,9 +50,9 @@ function ContactTile({
       className="flex flex-col items-center gap-3 md:gap-4 rounded-2xl border border-border p-6 md:p-10 hover:border-fg transition-colors min-h-[120px] justify-center"
     >
       {showSocialIcon ? (
-        <SocialIcon platform={card.key as "youtube" | "instagram" | "whatsapp"} className="h-6 w-6 text-accent" />
+        <SocialIcon platform={card.key as "youtube" | "instagram" | "whatsapp"} className="h-6 w-6 text-accent-ink" />
       ) : (
-        <Mail aria-hidden className="h-6 w-6 text-accent" strokeWidth={2} />
+        <Mail aria-hidden className="h-6 w-6 text-accent-ink" strokeWidth={2} />
       )}
       <span className="font-display text-2xl uppercase">{name}</span>
       <span className="text-muted text-sm text-center">{description}</span>

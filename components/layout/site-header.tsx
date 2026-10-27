@@ -5,20 +5,39 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 import { BrandLogo } from "@/components/ui/brand-logo";
 import { LanguageSwitcher } from "./language-switcher";
+import { WhatsAppIcon } from "@/components/ui/social-icons";
+import { whatsappUrl } from "@/lib/contact";
 import { Menu, X } from "lucide-react";
 
 const NAV_ITEMS = [
   { href: "/", key: "home" },
   { href: "/portfolio", key: "portfolio" },
   { href: "/plugins", key: "plugins" },
-  { href: "/contact", key: "contact" },
 ] as const;
+
+function WhatsAppCta({ label, message, className }: { label: string; message: string; className?: string }) {
+  return (
+    <a
+      href={whatsappUrl(message)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn(
+        "inline-flex items-center justify-center gap-2 rounded-full bg-accent font-body font-semibold text-accent-fg transition-shadow duration-200 hover:shadow-[0_0_0_5px_color-mix(in_srgb,var(--color-accent)_22%,transparent)]",
+        className,
+      )}
+    >
+      <WhatsAppIcon className="h-[18px] w-[18px]" />
+      {label}
+    </a>
+  );
+}
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const tNav = useTranslations("nav");
   const tBrand = useTranslations("brand");
+  const tFloating = useTranslations("floating");
 
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
@@ -54,7 +73,7 @@ export function SiteHeader() {
                   className={cn(
                     "rounded-full px-4 py-2 font-body text-sm transition-colors",
                     isActive(item.href)
-                      ? "bg-white/10 text-accent"
+                      ? "bg-accent/20 text-white"
                       : "text-white/75 hover:bg-white/[0.06] hover:text-white",
                   )}
                 >
@@ -62,8 +81,15 @@ export function SiteHeader() {
                 </Link>
               ))}
             </div>
+            <WhatsAppCta label={tNav("whatsappCta")} message={tFloating("whatsappMessage")} className="h-10 px-5 text-sm" />
             <LanguageSwitcher />
           </nav>
+
+          <WhatsAppCta
+            label={tNav("whatsappShort")}
+            message={tFloating("whatsappMessage")}
+            className="md:hidden ms-auto me-2 h-9 px-3.5 text-[13px]"
+          />
 
           <button
             className="md:hidden -me-2 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors hover:bg-white/10"
@@ -107,9 +133,10 @@ export function SiteHeader() {
             </Link>
           ))}
           <div
-            className={cn("pt-6 transition-opacity duration-500", menuOpen ? "opacity-100" : "opacity-0")}
+            className={cn("flex items-center gap-4 pt-6 transition-opacity duration-500", menuOpen ? "opacity-100" : "opacity-0")}
             style={{ transitionDelay: menuOpen ? "280ms" : "0ms" }}
           >
+            <WhatsAppCta label={tNav("whatsappCta")} message={tFloating("whatsappMessage")} className="h-12 px-6 text-base" />
             <LanguageSwitcher />
           </div>
         </nav>

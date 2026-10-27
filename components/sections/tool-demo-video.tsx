@@ -46,7 +46,7 @@ export function ToolDemoVideo({ tool }: { tool: Tool }) {
             <button
               type="button"
               onClick={() => setPlaying(0)}
-              className="inline-flex items-center gap-2 rounded-[var(--radius-xl)] bg-accent px-6 py-3 font-display text-sm uppercase tracking-wide text-fg transition hover:brightness-95"
+              className="inline-flex items-center gap-2 rounded-[var(--radius-xl)] bg-accent px-6 py-3 font-display text-sm uppercase tracking-wide text-accent-fg transition hover:brightness-95"
             >
               <Play aria-hidden className="h-4 w-4 fill-current" />
               {t("demoCta")}

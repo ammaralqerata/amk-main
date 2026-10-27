@@ -9,7 +9,9 @@
   --color-border: #cccccc;         /* border-subtle */
   --color-inverse: #000000;        /* surface-inverse (black sections) */
   --color-inverse-fg: #ffffff;     /* fg-inverse (white text on black) */
-  --color-accent: #00ff00;         /* pure green */
+  --color-accent: #19d97b;         /* chroma green (logo bar); every glow derives from it */
+  --color-accent-fg: #0a0a0b;      /* text on an accent fill */
+  --color-accent-ink: #0a7f4b;     /* the same green for text and icons on light backgrounds */
 
   /* Typography — per-locale font variable is set by the <html> class at runtime */
   --font-display: var(--font-active), ui-sans-serif, system-ui, sans-serif;
@@ -94,11 +96,11 @@ html, body {
 }
 .spotlight::before {
   z-index: -1;
-  background: radial-gradient(480px circle at var(--mx, 50%) var(--my, 0%), rgb(0 255 0 / 0.1), transparent 45%);
+  background: radial-gradient(480px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--color-accent) 12%, transparent), transparent 45%);
 }
 .spotlight::after {
   padding: 1px;
-  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 0%), rgb(0 255 0 / 0.55), transparent 40%);
+  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--color-accent) 60%, transparent), transparent 40%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -110,15 +112,15 @@ html, body {
   opacity: 1;
 }
 
-/* Slow-drifting green aurora for dark hero sections. Only transform animates. */
+/* Slow-drifting red aurora for dark hero sections. Only transform animates. */
 .aurora {
   position: absolute;
   inset: -25%;
   pointer-events: none;
   background:
-    radial-gradient(38% 45% at 22% 28%, rgb(0 255 0 / 0.16), transparent 70%),
-    radial-gradient(32% 40% at 82% 18%, rgb(0 210 255 / 0.09), transparent 70%),
-    radial-gradient(42% 48% at 62% 92%, rgb(0 255 140 / 0.1), transparent 70%);
+    radial-gradient(38% 45% at 22% 28%, color-mix(in srgb, var(--color-accent) 18%, transparent), transparent 70%),
+    radial-gradient(32% 40% at 82% 18%, rgb(255 255 255 / 0.05), transparent 70%),
+    radial-gradient(42% 48% at 62% 92%, color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 70%);
   animation: aurora-drift 22s ease-in-out infinite alternate;
   will-change: transform;
 }
@@ -142,4 +144,42 @@ html, body {
 
 @media (prefers-reduced-motion: reduce) {
   .aurora { animation: none; }
+}
+
+/* Floating WhatsApp button: a soft ring that ripples out every few seconds. */
+.wa-pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgb(37 211 102 / 0.55);
+  animation: wa-pulse 4s ease-out infinite;
+}
+@keyframes wa-pulse {
+  0%   { box-shadow: 0 0 0 0 rgb(37 211 102 / 0.55); }
+  45%  { box-shadow: 0 0 0 16px rgb(37 211 102 / 0); }
+  100% { box-shadow: 0 0 0 16px rgb(37 211 102 / 0); }
+}
+
+/* Reels strip: the track holds the list twice and slides by one copy, so it loops seamlessly. */
+.reels-track {
+  animation: reels-scroll var(--reels-duration, 120s) linear infinite;
+}
+.reels-strip:hover .reels-track,
+.reels-strip:focus-within .reels-track,
+.reels-strip[data-paused="true"] .reels-track {
+  animation-play-state: paused;
+}
+@keyframes reels-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Client names marquee, same seamless trick. */
+.marquee-track {
+  animation: reels-scroll var(--marquee-duration, 40s) linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-pulse::after, .reels-track, .marquee-track { animation: none; }
 }

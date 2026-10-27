@@ -6,6 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import "../globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { FloatingActions } from "@/components/layout/floating-actions";
 import { PageTransition } from "@/components/layout/page-transition";
 import { SpotlightTracker } from "@/components/ui/spotlight-tracker";
 import { routing } from "@/i18n/routing";
@@ -55,10 +56,10 @@ export async function generateMetadata({
     title: { default: title, template: t("titleTemplate") },
     icons: {
       icon: [
-        { url: "/favicon.ico?v=3", sizes: "any" },
+        { url: "/favicon.ico?v=4", sizes: "any" },
         { url: "/brand/icon-512.png", sizes: "512x512", type: "image/png" },
       ],
-      shortcut: ["/favicon.ico?v=3"],
+      shortcut: ["/favicon.ico?v=4"],
       apple: [{ url: "/brand/apple-touch-icon.png", sizes: "180x180" }],
     },
   };
@@ -90,6 +91,7 @@ export default async function LocaleLayout({
             <PageTransition>{children}</PageTransition>
           </main>
           <SiteFooter />
+          <FloatingActions />
           <SpotlightTracker />
         </NextIntlClientProvider>
       </body>

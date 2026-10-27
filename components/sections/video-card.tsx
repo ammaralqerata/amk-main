@@ -48,7 +48,7 @@ export function VideoCard({
         <span className="absolute inset-0 flex items-center justify-center">
           <span
             className={cn(
-              "flex items-center justify-center rounded-full bg-accent text-fg shadow-lg shadow-black/30 transition-transform duration-300 group-hover:scale-110",
+              "flex items-center justify-center rounded-full bg-accent text-accent-fg shadow-lg shadow-black/30 transition-transform duration-300 group-hover:scale-110",
               vertical ? "h-11 w-11" : "h-14 w-14",
             )}
           >

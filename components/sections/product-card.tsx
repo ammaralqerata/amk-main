@@ -8,10 +8,10 @@ import type { Tool } from "@/content/tools/types";
 
 /** Glow colour behind each card's screenshot, keyed by host app. */
 const GLOW: Record<PlatformKind, string> = {
-  adobe: "rgb(0 255 0 / 0.22)",
-  "after-effects": "rgb(153 153 255 / 0.28)",
-  "premiere-pro": "rgb(234 119 255 / 0.24)",
-  "desktop-app": "rgb(0 220 200 / 0.22)",
+  adobe: "color-mix(in srgb, var(--color-accent) 22%, transparent)",
+  "after-effects": "color-mix(in srgb, var(--color-accent) 16%, transparent)",
+  "premiere-pro": "color-mix(in srgb, var(--color-accent) 16%, transparent)",
+  "desktop-app": "rgb(255 255 255 / 0.1)",
 };
 
 export function ProductCard({ tool, featured = false }: { tool: Tool; featured?: boolean }) {
@@ -61,7 +61,7 @@ export function ProductCard({ tool, featured = false }: { tool: Tool; featured?:
           {isDownload ? (
             <a
               href={tool.cta.href}
-              className="inline-flex min-h-[46px] flex-1 items-center justify-center gap-2 rounded-full bg-accent px-5 text-sm font-semibold text-black transition-shadow hover:shadow-[0_0_0_5px_rgb(0_255_0_/_0.15)]"
+              className="inline-flex min-h-[46px] flex-1 items-center justify-center gap-2 rounded-full bg-accent px-5 text-sm font-semibold text-accent-fg transition-shadow hover:shadow-[0_0_0_5px_color-mix(in_srgb,var(--color-accent)_20%,transparent)]"
             >
               <Download aria-hidden className="h-4 w-4" />
               {tool.cta.label}
@@ -69,7 +69,7 @@ export function ProductCard({ tool, featured = false }: { tool: Tool; featured?:
           ) : (
             <Link
               href={tool.cta.href}
-              className="inline-flex min-h-[46px] flex-1 items-center justify-center rounded-full bg-accent px-5 text-sm font-semibold text-black"
+              className="inline-flex min-h-[46px] flex-1 items-center justify-center rounded-full bg-accent px-5 text-sm font-semibold text-accent-fg"
             >
               {tool.cta.label}
             </Link>

@@ -9,7 +9,7 @@ const base =
   "inline-flex items-center justify-center gap-2 px-6 py-3 min-h-[48px] font-display uppercase tracking-wide text-sm rounded-full transition-[color,background-color,border-color,box-shadow,transform] duration-200 active:scale-[0.98] disabled:opacity-50";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-accent text-black hover:shadow-[0_0_0_6px_rgb(0_255_0_/_0.15),0_10px_30px_-8px_rgb(0_255_0_/_0.55)]",
+  primary: "bg-accent text-accent-fg hover:shadow-[0_0_0_6px_color-mix(in_srgb,var(--color-accent)_20%,transparent),0_10px_30px_-8px_color-mix(in_srgb,var(--color-accent)_60%,transparent)]",
   inverse: "bg-inverse text-inverse-fg hover:bg-inverse/90",
   ghost: "bg-transparent text-current border border-current/25 hover:border-current hover:bg-current/[0.06]",
 };

@@ -48,7 +48,7 @@ export function ToolHero({ tool }: { tool: Tool }) {
           <div
             className="relative isolate overflow-hidden rounded-2xl border border-white/15 bg-white/[0.04] p-3 shadow-2xl shadow-black/40"
           >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_0%,rgba(0,255,0,0.16),transparent_34%),radial-gradient(circle_at_70%_20%,rgba(255,255,255,0.10),transparent_28%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_0%,color-mix(in_srgb,var(--color-accent)_18%,transparent),transparent_34%),radial-gradient(circle_at_70%_20%,rgba(255,255,255,0.10),transparent_28%)]" />
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-black">
               <Image
                 src={tool.heroImage}

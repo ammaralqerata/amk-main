@@ -3,6 +3,9 @@ import {
   FEATURED_VIDEO_IDS,
   getFeaturedVideos,
   getVideoTitle,
+  getActiveCategories,
+  getFilterCategories,
+  COMING_SOON_CATEGORIES,
   VIDEO_CATEGORIES,
   VIDEOS,
 } from "./videos";
@@ -20,10 +23,18 @@ describe("videos", () => {
     }
   });
 
-  it("has at least one video in every category", () => {
+  it("lists only the categories that have videos", () => {
+    const active = getActiveCategories();
+    expect(active.length).toBeGreaterThan(0);
     for (const category of VIDEO_CATEGORIES) {
-      expect(VIDEOS.some((v) => v.category === category)).toBe(true);
+      expect(active.includes(category)).toBe(VIDEOS.some((v) => v.category === category));
     }
+  });
+
+  it("keeps coming-soon categories in the filters even while empty", () => {
+    const filters = getFilterCategories();
+    for (const category of COMING_SOON_CATEGORIES) expect(filters).toContain(category);
+    for (const category of getActiveCategories()) expect(filters).toContain(category);
   });
 
   it("has a non-empty title in every locale", () => {

@@ -31,6 +31,8 @@ export function VideoCoverflow({ videos }: { videos: Video[] }) {
   const [hovered, setHovered] = useState(false);
   const [inView, setInView] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  // Some uploads have no maxres thumbnail; those fall back to hq.
+  const [hqOnly, setHqOnly] = useState<ReadonlySet<string>>(new Set());
   const stageRef = useRef<HTMLDivElement>(null);
   // A drag ends with a click on whichever card is under the pointer; ignore that click.
   const dragged = useRef(false);
@@ -133,16 +135,17 @@ export function VideoCoverflow({ videos }: { videos: Video[] }) {
                 className={cn(
                   "group absolute inset-0 overflow-hidden rounded-2xl bg-black outline-none",
                   isCenter
-                    ? "shadow-[0_40px_90px_-20px_rgb(0_0_0_/_0.9),0_0_0_1px_rgb(255_255_255_/_0.14),0_0_60px_-10px_rgb(0_255_0_/_0.35)]"
+                    ? "shadow-[0_40px_90px_-20px_rgb(0_0_0_/_0.9),0_0_0_1px_rgb(255_255_255_/_0.14),0_0_60px_-10px_color-mix(in_srgb,var(--color-accent)_40%,transparent)]"
                     : "shadow-[0_30px_60px_-20px_rgb(0_0_0_/_0.9)]",
                   distance > VISIBLE_RANGE && "pointer-events-none",
                 )}
               >
                 <Image
-                  src={getThumbnailUrl(video.id, "max")}
+                  src={getThumbnailUrl(video.id, hqOnly.has(video.id) ? "hq" : "max")}
                   alt=""
                   fill
                   draggable={false}
+                  onError={() => setHqOnly((s) => new Set(s).add(video.id))}
                   sizes="(min-width: 1024px) 580px, (min-width: 640px) 56vw, 74vw"
                   className="object-cover"
                 />

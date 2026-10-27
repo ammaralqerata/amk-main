@@ -7,7 +7,8 @@ export function Eyebrow({ children, tone = "light", className, icon }: {
   icon?: React.ReactNode;
 }) {
   return (
-    <div className={cn("inline-flex items-center gap-1.5", className)}>
+    // On light sections the icon takes the deeper green so it stays readable on white.
+    <div className={cn("inline-flex items-center gap-1.5", tone === "light" && "[--color-accent:var(--color-accent-ink)]", className)}>
       {icon}
       <span className={cn(
         "font-display text-[11px] tracking-[0.18em] uppercase",

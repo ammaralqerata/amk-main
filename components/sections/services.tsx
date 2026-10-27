@@ -20,10 +20,11 @@ export function Services() {
       variants={fadeRiseStagger}
       className="relative overflow-hidden bg-inverse text-inverse-fg"
     >
-      <div className="relative mx-auto max-w-[var(--container-max)] px-4 md:px-12 pt-16 md:pt-28 flex flex-col gap-8 md:gap-12">
-        <motion.div variants={fadeRise} className="px-2">
+      <div className="relative mx-auto max-w-[var(--container-max)] px-4 md:px-12 pt-12 md:pt-20 flex flex-col gap-8 md:gap-12">
+        <motion.header variants={fadeRise} className="flex flex-col items-center gap-4 text-center">
           <Eyebrow tone="dark" icon={<SectionMark kind="services" className="h-3.5 w-3.5" />}>{t("eyebrow")}</Eyebrow>
-        </motion.div>
+          <h2 className="font-display text-4xl uppercase md:text-5xl lg:text-6xl">{t("heading")}</h2>
+        </motion.header>
         <div className="grid gap-4 md:gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((s) => (
             <motion.article

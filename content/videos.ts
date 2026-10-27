@@ -1,6 +1,6 @@
 import type { Locale } from "@/i18n/routing";
 
-export type VideoCategory = "ads" | "documentary" | "creative" | "shorts";
+export type VideoCategory = "ads" | "documentary" | "creative" | "realEstate" | "ai" | "shorts";
 
 export type Video = {
   /** YouTube video id */
@@ -8,9 +8,14 @@ export type Video = {
   category: VideoCategory;
   /** A plain string is shown as-is in every locale. */
   title: string | Record<Locale, string>;
+  /** Vertical (9:16) video. Defaults to true for "shorts", false otherwise. */
+  vertical?: boolean;
 };
 
-export const VIDEO_CATEGORIES: VideoCategory[] = ["ads", "documentary", "creative", "shorts"];
+export const VIDEO_CATEGORIES: VideoCategory[] = ["ads", "documentary", "creative", "realEstate", "ai", "shorts"];
+
+/** Shown in the filters with a "coming soon" note while they have no videos; other empty categories stay hidden. */
+export const COMING_SOON_CATEGORIES: VideoCategory[] = ["realEstate", "ai"];
 
 const BEFORE_AFTER = { ar: "قبل وبعد المونتاج", en: "Before & after the edit" };
 
@@ -36,6 +41,10 @@ export const VIDEOS: Video[] = [
   { id: "mBZqKUAaj0g", category: "creative", title: "برومو التطوير المتميز" },
   { id: "5vKHhC1jKPA", category: "creative", title: "Demo promo for a wood factory" },
   { id: "q1FYUe6c-z4", category: "creative", title: "GTA Grand Theft Auto montage" },
+
+  // Real estate videos — add them here; a vertical one gets `vertical: true`.
+
+  // AI videos — add them here; a vertical one gets `vertical: true`.
 
   // Reels & shorts
   { id: "VJf9--DPHzw", category: "shorts", title: BEFORE_AFTER },
@@ -89,11 +98,27 @@ export function getVideoTitle(video: Video, locale: Locale): string {
 }
 
 export function isVertical(video: Video): boolean {
-  return video.category === "shorts";
+  return video.vertical ?? video.category === "shorts";
 }
 
 export function getVideosByCategory(category: VideoCategory): Video[] {
   return VIDEOS.filter((v) => v.category === category);
+}
+
+/** Categories that have at least one video, in display order. */
+export function getActiveCategories(): VideoCategory[] {
+  return VIDEO_CATEGORIES.filter((c) => VIDEOS.some((v) => v.category === c));
+}
+
+/** Filter chips: categories with videos, plus the coming-soon ones that are still empty. */
+export function getFilterCategories(): VideoCategory[] {
+  return VIDEO_CATEGORIES.filter(
+    (c) => VIDEOS.some((v) => v.category === c) || COMING_SOON_CATEGORIES.includes(c),
+  );
+}
+
+export function isComingSoon(category: VideoCategory): boolean {
+  return !VIDEOS.some((v) => v.category === category);
 }
 
 export function getFeaturedVideos(): Video[] {

@@ -4,8 +4,11 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
 import {
+  getActiveCategories,
+  getFilterCategories,
   getVideosByCategory,
-  VIDEO_CATEGORIES,
+  isComingSoon,
+  isVertical,
   VIDEOS,
   type Video,
   type VideoCategory,
@@ -13,6 +16,7 @@ import {
 import { fadeRise, fadeRiseStagger } from "@/lib/motion";
 import { VideoCard } from "./video-card";
 import { VideoPlayerModal } from "./video-player-modal";
+import { ComingSoonVideos } from "./coming-soon-videos";
 
 type Filter = VideoCategory | "all";
 
@@ -26,8 +30,8 @@ export function VideoGallery() {
   const topRef = useRef<HTMLDivElement>(null);
   const [player, setPlayer] = useState<{ videos: Video[]; index: number } | null>(null);
 
-  const filters: Filter[] = ["all", ...VIDEO_CATEGORIES];
-  const visibleCategories = filter === "all" ? VIDEO_CATEGORIES : [filter];
+  const filters: Filter[] = ["all", ...getFilterCategories()];
+  const visibleCategories = filter === "all" ? getActiveCategories() : [filter];
 
   function selectFilter(next: Filter) {
     setFilter(next);
@@ -48,6 +52,7 @@ export function VideoGallery() {
         >
           {filters.map((f) => {
             const count = f === "all" ? VIDEOS.length : getVideosByCategory(f).length;
+            const soon = f !== "all" && isComingSoon(f);
             const active = filter === f;
             return (
               <button
@@ -63,15 +68,18 @@ export function VideoGallery() {
                 )}
               >
                 {f === "all" ? t("all") : t(`categories.${f}`)}
-                <span className={cn("font-mono text-xs", active ? "text-accent" : "text-muted")}>{count}</span>
+                <span className={cn("text-xs", !soon && "font-mono", active || soon ? "text-accent" : "text-muted")}>
+                  {soon ? t("soon") : count}
+                </span>
               </button>
             );
           })}
         </div>
 
         {visibleCategories.map((category) => {
+          if (isComingSoon(category)) return <ComingSoonVideos key={category} category={category} tone="light" />;
           const all = getVideosByCategory(category);
-          const vertical = category === "shorts";
+          const vertical = all.every(isVertical);
           const collapsible = vertical && filter === "all" && all.length > SHORTS_PREVIEW_COUNT;
           const shown = collapsible && !shortsExpanded ? all.slice(0, SHORTS_PREVIEW_COUNT) : all;
 
