@@ -80,7 +80,9 @@
     "youtube": "يوتيوب",
     "instagram": "إنستغرام",
     "email": "البريد الإلكتروني",
-    "whatsapp": "واتساب"
+    "whatsapp": "واتساب",
+    "privacy": "سياسة الخصوصية",
+    "terms": "شروط الاستخدام"
   },
   "portfolioPage": {
     "metaTitle": "الأعمال",

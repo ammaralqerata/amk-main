@@ -75,9 +75,15 @@ export function SiteFooter() {
           </div>
         </div>
         <div className="h-px bg-[var(--color-fg-secondary)]" />
-        <p className="text-xs text-muted">
-          {tFooter("rights", { year: new Date().getFullYear() })}
-        </p>
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <p className="text-xs text-muted">
+            {tFooter("rights", { year: new Date().getFullYear() })}
+          </p>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="text-xs text-muted hover:text-accent transition-colors">{tFooter("privacy")}</Link>
+            <Link href="/terms" className="text-xs text-muted hover:text-accent transition-colors">{tFooter("terms")}</Link>
+          </div>
+        </div>
       </div>
     </footer>
   );

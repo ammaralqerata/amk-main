@@ -80,7 +80,9 @@
     "youtube": "YouTube",
     "instagram": "Instagram",
     "email": "Email",
-    "whatsapp": "WhatsApp"
+    "whatsapp": "WhatsApp",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
   },
   "portfolioPage": {
     "metaTitle": "Portfolio",
