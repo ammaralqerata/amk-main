@@ -104,12 +104,14 @@
     "showMore": "Show {count} more",
     "showLess": "Show less",
     "categories": {
-      "ads": "Ads & Motion",
-      "documentary": "Documentary",
-      "creative": "Creative Content",
+      "motion": "Motion Graphics",
+      "ads": "Ads & Promos",
       "realEstate": "Real Estate",
       "ai": "AI",
-      "shorts": "Reels & Shorts"
+      "documentary": "Documentary",
+      "content": "Content Creation",
+      "beforeAfter": "Before & After",
+      "reels": "Reels"
     },
     "carouselLabel": "Selected work",
     "goTo": "Show video {n}",
@@ -118,7 +120,13 @@
       "title": "Coming soon",
       "body": "“{category}” work is being prepared and will be added here soon. Have a project in this field?",
       "cta": "Message me on WhatsApp"
-    }
+    },
+    "before": "Before",
+    "after": "After",
+    "compareHint": "Drag the line to compare",
+    "compareLabel": "Before and after comparison",
+    "pause": "Pause",
+    "resume": "Play"
   },
   "pluginsPage": {
     "metaTitle": "Plugins",

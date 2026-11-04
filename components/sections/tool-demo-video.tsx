@@ -19,8 +19,9 @@ export function ToolDemoVideo({ tool }: { tool: Tool }) {
   // Reuse the portfolio entry when there is one so titles stay in one place.
   const video: Video = VIDEOS.find((v) => v.id === tool.demoVideoId) ?? {
     id: tool.demoVideoId,
-    category: "shorts",
+    category: "ads",
     title: tool.name,
+    vertical: true,
   };
 
   return (

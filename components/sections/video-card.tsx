@@ -1,10 +1,11 @@
 "use client";
 import Image from "next/image";
-import { Play } from "lucide-react";
+import { Columns2, Play } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
-import { getThumbnailUrl, getVideoTitle, isVertical, type Video } from "@/content/videos";
+import { getPoster, getVideoTitle, isVertical, type Video } from "@/content/videos";
 import type { Locale } from "@/i18n/routing";
+import { LoopPreview } from "./loop-preview";
 
 export function VideoCard({
   video,
@@ -37,14 +38,17 @@ export function VideoCard({
           vertical ? "aspect-[9/16]" : "aspect-video",
         )}
       >
-        <Image
-          src={getThumbnailUrl(video.id)}
-          alt=""
-          fill
-          sizes={sizes}
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+        <span className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
+          <Image src={getPoster(video)} alt="" fill sizes={sizes} className="object-cover" />
+          {video.preview ? <LoopPreview src={video.preview} /> : null}
+        </span>
         <span className="absolute inset-0 bg-black/10 transition-colors duration-300 group-hover:bg-black/35" />
+        {video.compare ? (
+          <span className="absolute top-2 start-2 inline-flex items-center gap-1.5 rounded-full bg-black/65 px-2.5 py-1 text-[11px] font-bold text-white backdrop-blur-sm">
+            <Columns2 aria-hidden className="h-3.5 w-3.5 text-accent" />
+            {t("categories.beforeAfter")}
+          </span>
+        ) : null}
         <span className="absolute inset-0 flex items-center justify-center">
           <span
             className={cn(

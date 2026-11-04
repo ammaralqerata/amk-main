@@ -5,9 +5,10 @@ import { AnimatePresence, motion, type PanInfo } from "framer-motion";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
-import { getThumbnailUrl, getVideoTitle, type Video } from "@/content/videos";
+import { getPoster, getVideoTitle, type Video } from "@/content/videos";
 import type { Locale } from "@/i18n/routing";
 import { VideoPlayerModal } from "./video-player-modal";
+import { LoopPreview } from "./loop-preview";
 
 /** How long each video stays in the centre before the carousel moves on. */
 const AUTO_ADVANCE_MS = 4000;
@@ -16,13 +17,16 @@ const VISIBLE_RANGE = 3;
 /** Size and darkness by distance from the centre (0 = centre). */
 const SCALES = [1, 0.78, 0.62, 0.5];
 const DIM = [0, 0.52, 0.68, 0.8];
+/** Above this many videos the dots give way to a "03 / 12" counter. */
+const MAX_DOTS = 12;
 
 /**
  * Cover-flow carousel: the centre card is large and playable, neighbours shrink
  * and dim as they recede. Auto-advances (pausing on hover, focus, when off-screen
  * or while a video is playing), supports swipe/drag, arrows, dots and keyboard.
+ * `vertical` = 9:16 reels; a reel with a `preview` loop plays it while in the centre.
  */
-export function VideoCoverflow({ videos }: { videos: Video[] }) {
+export function VideoCoverflow({ videos, vertical = false }: { videos: Video[]; vertical?: boolean }) {
   const locale = useLocale() as Locale;
   const isArabic = locale === "ar";
   const t = useTranslations("videos");
@@ -103,7 +107,10 @@ export function VideoCoverflow({ videos }: { videos: Video[] }) {
           dragElastic={0.18}
           onDragStart={() => (dragged.current = true)}
           onDragEnd={onDragEnd}
-          className="relative mx-auto aspect-video w-[74vw] cursor-grab active:cursor-grabbing sm:w-[56vw] lg:w-[580px]"
+          className={cn(
+            "relative mx-auto cursor-grab active:cursor-grabbing",
+            vertical ? "aspect-[9/16] w-[52vw] sm:w-[30vw] lg:w-[280px]" : "aspect-video w-[74vw] sm:w-[56vw] lg:w-[580px]",
+          )}
         >
           {videos.map((video, i) => {
             let offset = i - active;
@@ -126,7 +133,7 @@ export function VideoCoverflow({ videos }: { videos: Video[] }) {
                 }}
                 initial={false}
                 animate={{
-                  x: `${offset * dir * 42}%`,
+                  x: `${offset * dir * (vertical ? 58 : 42)}%`,
                   scale: SCALES[Math.min(distance, SCALES.length - 1)],
                   opacity: distance > VISIBLE_RANGE ? 0 : 1,
                 }}
@@ -141,14 +148,15 @@ export function VideoCoverflow({ videos }: { videos: Video[] }) {
                 )}
               >
                 <Image
-                  src={getThumbnailUrl(video.id, hqOnly.has(video.id) ? "hq" : "max")}
+                  src={getPoster(video, hqOnly.has(video.id) ? "hq" : "max")}
                   alt=""
                   fill
                   draggable={false}
                   onError={() => setHqOnly((s) => new Set(s).add(video.id))}
-                  sizes="(min-width: 1024px) 580px, (min-width: 640px) 56vw, 74vw"
+                  sizes={vertical ? "(min-width: 1024px) 280px, (min-width: 640px) 30vw, 52vw" : "(min-width: 1024px) 580px, (min-width: 640px) 56vw, 74vw"}
                   className="object-cover"
                 />
+                {isCenter && video.preview ? <LoopPreview key={video.id} src={video.preview} /> : null}
                 {/* Side cards dim as they recede; the centre card gets a soft bottom fade. */}
                 <span
                   className="absolute inset-0 bg-black transition-opacity duration-500"
@@ -190,6 +198,11 @@ export function VideoCoverflow({ videos }: { videos: Video[] }) {
 
       <div className="flex items-center gap-5">
         <ArrowButton label={t("previous")} onClick={() => go(-1)} pointsLeft={!isArabic} />
+        {n > MAX_DOTS ? (
+          <p className="min-w-[4.5rem] text-center font-mono text-sm text-white/70" dir="ltr">
+            {String(active + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}
+          </p>
+        ) : (
         <div className="flex items-center gap-2">
           {videos.map((video, i) => (
             <button
@@ -209,6 +222,7 @@ export function VideoCoverflow({ videos }: { videos: Video[] }) {
             </button>
           ))}
         </div>
+        )}
         <ArrowButton label={t("next")} onClick={() => go(1)} pointsLeft={isArabic} />
       </div>
 

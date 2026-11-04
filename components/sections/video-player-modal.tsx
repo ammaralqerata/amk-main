@@ -5,7 +5,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ExternalLink, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
-import { getEmbedUrl, getVideoTitle, getWatchUrl, isVertical, type Video } from "@/content/videos";
+import { getEmbedUrl, getPoster, getVideoTitle, getWatchUrl, isOnYoutube, isVertical, type Video } from "@/content/videos";
+import { CompareSlider } from "./compare-slider";
 import type { Locale } from "@/i18n/routing";
 
 /**
@@ -117,12 +118,26 @@ export function VideoPlayerModal({
                   : "aspect-video w-full max-w-[1100px] max-h-full",
               )}
             >
-              <iframe
-                src={getEmbedUrl(video.id)}
-                title={getVideoTitle(video, locale)}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
-                className="absolute inset-0 h-full w-full"
-              />
+              {video.compare ? (
+                <CompareSlider before={video.compare.before} after={video.compare.after} start={video.compare.start} poster={getPoster(video)} />
+              ) : video.file ? (
+                <video
+                  src={video.file}
+                  poster={getPoster(video)}
+                  controls
+                  autoPlay
+                  playsInline
+                  preload="auto"
+                  className="absolute inset-0 h-full w-full bg-black object-contain"
+                />
+              ) : (
+                <iframe
+                  src={getEmbedUrl(video.id)}
+                  title={getVideoTitle(video, locale)}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+                  className="absolute inset-0 h-full w-full"
+                />
+              )}
             </motion.div>
 
             {hasSiblings ? (
@@ -146,6 +161,7 @@ export function VideoPlayerModal({
               </h2>
             </div>
             <div className="flex items-center justify-between gap-4">
+              {isOnYoutube(video) ? (
               <a
                 href={getWatchUrl(video)}
                 target="_blank"
@@ -155,6 +171,7 @@ export function VideoPlayerModal({
                 {t("watchOnYoutube")}
                 <ExternalLink aria-hidden className="h-4 w-4" />
               </a>
+              ) : <span />}
               {hasSiblings ? (
                 <div className="flex gap-2 md:hidden">
                   <MobileNavButton label={t("previous")} onClick={() => step(-1)} pointsLeft={!isArabic} />

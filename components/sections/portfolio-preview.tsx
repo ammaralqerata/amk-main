@@ -8,28 +8,29 @@ import { Eyebrow } from "./eyebrow";
 import { SectionMark } from "@/components/ui/section-mark";
 import {
   getFeaturedVideos,
-  getFilterCategories,
-  getVideosByCategory,
+  getFilters,
+  getVideosFor,
   isComingSoon,
   isVertical,
-  VIDEOS,
-  type VideoCategory,
+  type VideoFilter,
 } from "@/content/videos";
 import { fadeRise, fadeRiseStagger } from "@/lib/motion";
 import { VideoCoverflow } from "./video-coverflow";
-import { ReelsStrip } from "./reels-strip";
 import { ComingSoonVideos } from "./coming-soon-videos";
 
-type Filter = VideoCategory | "all";
+type Filter = VideoFilter;
 
 const FEATURED = getFeaturedVideos();
-const FILTERS: Filter[] = ["all", ...getFilterCategories()];
+const FILTERS: Filter[] = getFilters();
 
-/** Landscape videos go in the cover-flow, vertical ones in the reels strip under it. */
+/** How many of the newest reels the home carousel shows; the rest are on the portfolio page. */
+const HOME_REELS = 12;
+
+/** Landscape videos go in the top cover-flow, the newest vertical ones in a reels cover-flow under it. */
 function videosFor(filter: Filter) {
-  if (filter === "all") return { long: FEATURED, reels: VIDEOS.filter(isVertical) };
-  const all = getVideosByCategory(filter);
-  return { long: all.filter((v) => !isVertical(v)), reels: all.filter(isVertical) };
+  if (filter === "all") return { long: FEATURED, reels: getVideosFor("reels").slice(0, HOME_REELS) };
+  const all = getVideosFor(filter);
+  return { long: all.filter((v) => !isVertical(v)), reels: all.filter(isVertical).slice(0, HOME_REELS) };
 }
 
 export function PortfolioPreview() {
@@ -68,7 +69,7 @@ export function PortfolioPreview() {
         >
           {FILTERS.map((f) => {
             const active = filter === f;
-            const soon = f !== "all" && isComingSoon(f);
+            const soon = isComingSoon(f);
             return (
               <button
                 key={f}
@@ -93,7 +94,7 @@ export function PortfolioPreview() {
           })}
         </motion.div>
 
-        {filter !== "all" && isComingSoon(filter) ? <ComingSoonVideos key={filter} category={filter} tone="dark" /> : null}
+        {isComingSoon(filter) ? <ComingSoonVideos key={filter} category={filter} tone="dark" /> : null}
 
         {long.length > 0 ? (
           <motion.div variants={fadeRise} className="-mx-4 overflow-hidden py-4 md:-mx-12">
@@ -104,9 +105,9 @@ export function PortfolioPreview() {
 
         {reels.length > 0 ? (
           <motion.div variants={fadeRise} className="flex flex-col gap-4">
-            <h3 className="px-1 font-display text-lg uppercase text-white/80 md:text-xl">{tVideos("categories.shorts")}</h3>
-            <div className="-mx-4 md:-mx-12">
-              <ReelsStrip key={filter} videos={reels} />
+            <h3 className="px-1 font-display text-lg uppercase text-white/80 md:text-xl">{tVideos("categories.reels")}</h3>
+            <div className="-mx-4 overflow-hidden py-4 md:-mx-12">
+              <VideoCoverflow key={`reels-${filter}`} videos={reels} vertical />
             </div>
           </motion.div>
         ) : null}
