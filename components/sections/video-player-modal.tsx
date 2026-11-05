@@ -120,7 +120,7 @@ export function VideoPlayerModal({
             >
               {video.compare ? (
                 <CompareSlider before={video.compare.before} after={video.compare.after} start={video.compare.start} poster={getPoster(video)} />
-              ) : video.file ? (
+              ) : video.file && !video.yt ? (
                 <video
                   src={video.file}
                   poster={getPoster(video)}
@@ -132,7 +132,7 @@ export function VideoPlayerModal({
                 />
               ) : (
                 <iframe
-                  src={getEmbedUrl(video.id)}
+                  src={getEmbedUrl(video.yt ?? video.id)}
                   title={getVideoTitle(video, locale)}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
                   className="absolute inset-0 h-full w-full"
@@ -161,7 +161,7 @@ export function VideoPlayerModal({
               </h2>
             </div>
             <div className="flex items-center justify-between gap-4">
-              {isOnYoutube(video) ? (
+              {isOnYoutube(video) || video.yt ? (
               <a
                 href={getWatchUrl(video)}
                 target="_blank"

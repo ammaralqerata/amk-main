@@ -111,21 +111,21 @@ export function PluginRequest() {
           ) : null}
         </label>
 
-        <div className="mt-1 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+        <div className="mt-1 grid grid-cols-1 gap-3 sm:grid-cols-2">
           <button
             type="submit"
             value="whatsapp"
-            className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-accent px-5 font-semibold text-accent-fg transition-shadow hover:shadow-[0_0_0_6px_color-mix(in_srgb,var(--color-accent)_20%,transparent)]"
+            className="inline-flex min-h-[46px] min-w-0 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-accent px-4 text-sm font-semibold text-accent-fg transition-shadow hover:shadow-[0_0_0_6px_color-mix(in_srgb,var(--color-accent)_20%,transparent)]"
           >
-            <WhatsAppIcon className="h-5 w-5" />
+            <WhatsAppIcon className="h-4 w-4 shrink-0" />
             {t("sendWhatsapp")}
           </button>
           <button
             type="submit"
             value="email"
-            className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/25 px-5 font-semibold text-white transition-colors hover:border-white hover:bg-white/[0.06]"
+            className="inline-flex min-h-[46px] min-w-0 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/25 px-4 text-sm font-semibold text-white transition-colors hover:border-white hover:bg-white/[0.06]"
           >
-            <Mail aria-hidden className="h-5 w-5" />
+            <Mail aria-hidden className="h-4 w-4 shrink-0" />
             {t("sendEmail")}
           </button>
         </div>

@@ -12,6 +12,7 @@ import {
   getVideosFor,
   isComingSoon,
   isVertical,
+  type Video,
   type VideoFilter,
 } from "@/content/videos";
 import { fadeRise, fadeRiseStagger } from "@/lib/motion";
@@ -26,11 +27,15 @@ const FILTERS: Filter[] = getFilters();
 /** How many of the newest reels the home carousel shows; the rest are on the portfolio page. */
 const HOME_REELS = 12;
 
-/** Landscape videos go in the top cover-flow, the newest vertical ones in a reels cover-flow under it. */
+/**
+ * Landscape videos go in the top cover-flow; under it, a reels cover-flow of the newest work only
+ * (dated, site-hosted videos). Older YouTube reels stay on the portfolio page.
+ */
 function videosFor(filter: Filter) {
-  if (filter === "all") return { long: FEATURED, reels: getVideosFor("reels").slice(0, HOME_REELS) };
+  const newest = (list: Video[]) => list.filter((v) => isVertical(v) && v.date).slice(0, HOME_REELS);
+  if (filter === "all") return { long: FEATURED, reels: newest(getVideosFor("reels")) };
   const all = getVideosFor(filter);
-  return { long: all.filter((v) => !isVertical(v)), reels: all.filter(isVertical).slice(0, HOME_REELS) };
+  return { long: all.filter((v) => !isVertical(v)), reels: newest(all) };
 }
 
 export function PortfolioPreview() {
@@ -97,14 +102,14 @@ export function PortfolioPreview() {
         {isComingSoon(filter) ? <ComingSoonVideos key={filter} category={filter} tone="dark" /> : null}
 
         {long.length > 0 ? (
-          <motion.div variants={fadeRise} className="-mx-4 overflow-hidden py-4 md:-mx-12">
+          <motion.div variants={fadeRise} initial="hidden" animate="visible" className="-mx-4 overflow-hidden py-4 md:-mx-12">
             {/* key: a new filter starts the carousel from its first video */}
             <VideoCoverflow key={filter} videos={long} />
           </motion.div>
         ) : null}
 
         {reels.length > 0 ? (
-          <motion.div variants={fadeRise} className="flex flex-col gap-4">
+          <motion.div variants={fadeRise} initial="hidden" animate="visible" className="flex flex-col gap-4">
             <h3 className="px-1 font-display text-lg uppercase text-white/80 md:text-xl">{tVideos("categories.reels")}</h3>
             <div className="-mx-4 overflow-hidden py-4 md:-mx-12">
               <VideoCoverflow key={`reels-${filter}`} videos={reels} vertical />

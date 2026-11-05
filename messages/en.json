@@ -216,7 +216,10 @@
       "viewOriginal": "See the original message",
       "close": "Close",
       "originalAlt": "Original message from {name}"
-    }
+    },
+    "agencies": "Companies I've worked with",
+    "brands": "Brands I've edited for",
+    "creators": "Authors & creators I work with"
   },
   "finalCta": {
     "eyebrow": "Contact",

@@ -19,6 +19,8 @@ export type Video = {
   youtube?: boolean;
   /** The full video when it is served from this site instead of YouTube. */
   file?: string;
+  /** Unlisted YouTube copy of the full video; the card keeps its site poster/preview, the player embeds this. */
+  yt?: string;
   /** Cover image (defaults to the YouTube thumbnail). */
   poster?: string;
   /** A few seconds of silent loop (~300 KB) that plays on the card while it is on screen. */
@@ -26,6 +28,8 @@ export type Video = {
   /** Synced raw/final pair (same length, same frame rate) shown in the before/after slider;
    *  `start` = second to open on, where the difference is clearest. */
   compare?: { before: string; after: string; start?: number };
+  /** The clean finished video (no before/after frame), shown everywhere except the before/after tab. */
+  final?: { file?: string; yt?: string; preview: string; poster: string };
   /** When it was finished (YYYY-MM-DDTHH:MM). Dated videos come first, newest first; undated ones keep list order after them. */
   date?: string;
 };
@@ -35,6 +39,82 @@ export const VIDEO_CATEGORIES: VideoCategory[] = ["motion", "ads", "realEstate",
 /** Shown in the tabs with a "coming soon" note while they have no videos; other empty categories stay hidden. */
 export const COMING_SOON_CATEGORIES: VideoCategory[] = ["realEstate", "ai"];
 
+/** Categories kept for sorting but not offered as a tab (owner, 2026-11-04: content reels live under "reels"). */
+export const HIDDEN_TABS: VideoCategory[] = ["content"];
+
+/** Slugs whose clean final lives in public/videos/reels/<slug>{.mp4,-preview.mp4,.jpg}. */
+const HAS_FINAL = new Set<string>([
+  "railing",
+  "football-field",
+  "wooden-house",
+  "shraitih-map",
+  "khamis-villas",
+  "ajman-development",
+  "madina-land",
+  "oraija",
+  "mlml-trailer",
+  "mlml-part2",
+  "laith-investor",
+  "mubasher-trading",
+  "mohammad-re-1",
+  "mohammad-re-2",
+  "mohammad-re-3",
+  "mohammad-re-4",
+  "omran-email",
+  "omran-digital",
+  "nasaq-case-1",
+  "nasaq-case-2",
+  "ard-alsinaa",
+]);
+
+/** Unlisted YouTube ids sent by Ammar 2026-11-05 — clean finals. Missing ones (YouTube copyright block) stay on the site. */
+const FINAL_YT: Record<string, string> = {
+  "ard-alsinaa": "QKikJXY_a44",
+  "mohammad-re-1": "WUUpxA3GnBA",
+  "mohammad-re-2": "SL1WWXtCtSk",
+  "mohammad-re-3": "p9NJcYU6q28",
+  "mohammad-re-4": "ronVQ0CFAs0",
+  "madina-land": "MHu5R6oSoh8",
+  "laith-investor": "_G0VyoqLd6E",
+  "wooden-house": "lHE3JtEqfBY",
+  oraija: "buVG1NocNic",
+  railing: "87ngrkoSSX8",
+  "omran-digital": "qzkIHHtxHyY",
+  "omran-email": "VUQGQJUkJ5I",
+  "khamis-villas": "0YJGoTwt-sg",
+  "mubasher-trading": "wiUMm6HPTVA",
+  "shraitih-map": "gvJjN776BYc",
+  "football-field": "tcAs31AbwVM",
+  "nasaq-case-1": "gX88wNmbTcQ",
+  "nasaq-case-2": "duExdsm6n-Q",
+};
+
+/** Same, for the before/after composites. */
+const BA_YT: Record<string, string> = {
+  "mohammad-re-1": "XdtLLaip15Q",
+  "mohammad-re-2": "MD1sWIvvsGM",
+  "mohammad-re-3": "z5mn_b8xWT4",
+  "mohammad-re-4": "4hHTmHabkuw",
+  "laith-investor": "4uFn7PvS1TY",
+  "wooden-house": "UU9_yJwA16M",
+  oraija: "Y_dUJdyrU_M",
+  railing: "F22cXng4xgI",
+  "omran-digital": "-lLEBbQd_yg",
+  "omran-email": "Ru5jIgxlxas",
+  "khamis-villas": "0CrabHngUmw",
+  "mubasher-trading": "lUtYm3Bz0O8",
+  "shraitih-map": "tkI0VjqCLoE",
+  "football-field": "eOPhr9pJ3Bc",
+  "nasaq-case-2": "K8gpFVMsyTg",
+};
+
+function finalOf(slug: string): Video["final"] {
+  if (!HAS_FINAL.has(slug)) return undefined;
+  const base = `/videos/reels/${slug}`;
+  const yt = FINAL_YT[slug];
+  return { ...(yt ? { yt } : { file: `${base}.mp4` }), preview: `${base}-preview.mp4`, poster: `${base}.jpg` };
+}
+
 const BEFORE_AFTER = { ar: "قبل وبعد المونتاج", en: "Before & after the edit" };
 
 /** Shorthand for a vertical reel. */
@@ -42,29 +122,29 @@ function reel(id: string, category: VideoCategory, title: Video["title"], extra:
   return { id, category, title, vertical: true, ...extra };
 }
 
-/** Finish date of each site-hosted video (the final render's date). */
+/** When each site-hosted video was really finished: the clean final file's date on Ammar's drives (2026-11-04). */
 const FINISHED: Record<string, string> = {
-  "mubasher-trading": "2026-11-04T16:15",
-  "ard-alsinaa": "2026-11-03T07:10",
-  "laith-investor": "2026-11-02T23:05",
-  "omran-digital": "2026-11-02T22:54",
-  "omran-email": "2026-11-02T22:42",
-  "mohammad-re-4": "2026-11-02T19:00",
-  "mohammad-re-3": "2026-11-02T18:52",
-  "mohammad-re-2": "2026-11-02T18:43",
-  "mohammad-re-1": "2026-11-02T18:36",
-  "shraitih-map": "2026-11-02T05:41",
-  "nasaq-case-2": "2026-10-29T16:55",
-  "nasaq-case-1": "2026-10-29T16:54",
-  "mlml-part2": "2026-10-29T13:22",
-  railing: "2026-10-29T13:07",
-  "mlml-trailer": "2026-10-28T13:30",
-  "khamis-villas": "2026-10-28T01:20",
-  "ajman-development": "2026-10-27T18:54",
-  "madina-land": "2026-10-27T11:10",
-  "football-field": "2026-10-25T13:50",
-  "wooden-house": "2026-10-25T13:44",
-  oraija: "2026-10-25T13:25",
+  "laith-investor": "2026-11-02T22:02",
+  "mohammad-re-4": "2026-11-02T18:19",
+  "mohammad-re-3": "2026-11-02T18:18",
+  "mohammad-re-2": "2026-11-02T18:17",
+  "mohammad-re-1": "2026-11-02T18:16",
+  "mlml-part2": "2026-10-28T17:48",
+  "mlml-trailer": "2026-10-28T12:00",
+  oraija: "2026-10-24T19:58",
+  railing: "2026-10-21T15:46",
+  "football-field": "2026-10-17T16:22",
+  "wooden-house": "2026-10-14T15:40",
+  "ajman-development": "2026-09-14T02:08",
+  "madina-land": "2026-08-10T00:04",
+  "nasaq-case-2": "2026-07-29T16:19",
+  "nasaq-case-1": "2026-07-29T13:53",
+  "khamis-villas": "2026-06-12T17:49",
+  "omran-digital": "2026-05-30T08:10",
+  "omran-email": "2026-05-17T19:53",
+  "shraitih-map": "2026-03-31T09:55",
+  "ard-alsinaa": "2026-03-06T02:40",
+  "mubasher-trading": "2025-12-31T21:27",
 };
 
 /**
@@ -76,12 +156,13 @@ function beforeAfter(slug: string, category: VideoCategory, title: Video["title"
   return {
     id: slug,
     date: FINISHED[slug],
+    final: finalOf(slug),
     category,
     also: [...also, "beforeAfter"],
     title,
     vertical: true,
     youtube: false,
-    file: `${base}.mp4`,
+    ...(BA_YT[slug] ? { yt: BA_YT[slug] } : { file: `${base}.mp4` }),
     preview: `${base}-preview.mp4`,
     poster: `${base}.jpg`,
   };
@@ -89,26 +170,26 @@ function beforeAfter(slug: string, category: VideoCategory, title: Video["title"
 
 export const VIDEOS: Video[] = [
   // Motion graphics (animated ads)
-  { id: "UZewDB18_ho", category: "motion", also: ["ads"], title: "اعلان توب كار لتأجير السيارات" },
-  { id: "5L-x90s5SmI", category: "motion", also: ["ads"], title: "اعلان لمتجر Pinky Glow" },
-  { id: "_a7cJPGj_tY", category: "motion", also: ["ads"], title: "المطبخ الملكي" },
-  { id: "nxNB5bXbgSg", category: "motion", also: ["ads"], title: "من ورشة توفيق كنعان" },
-  { id: "-X0_CpwL8V0", category: "motion", also: ["ads"], title: "Hotel Dream Erbil" },
-  { id: "zJrUv7G-Txw", category: "motion", also: ["ads"], title: "تطبيق محجوز" },
-  { id: "ZOe088cCC94", category: "motion", also: ["ads"], title: "اعلان لشركة ECN" },
-  { id: "J_lJzzEKgJE", category: "motion", also: ["ads"], title: "اعلان لشركة Premium Target" },
-  { id: "Q-mWHjpIhcU", category: "motion", also: ["ads"], title: "اعلان لفندق فلاش لايت" },
+  { id: "UZewDB18_ho", category: "motion", title: "اعلان توب كار لتأجير السيارات" },
+  { id: "5L-x90s5SmI", category: "motion", title: "اعلان لمتجر Pinky Glow" },
+  { id: "_a7cJPGj_tY", category: "motion", title: "المطبخ الملكي" },
+  { id: "nxNB5bXbgSg", category: "motion", title: "من ورشة توفيق كنعان" },
+  { id: "-X0_CpwL8V0", category: "motion", title: "Hotel Dream Erbil" },
+  { id: "zJrUv7G-Txw", category: "motion", title: "تطبيق محجوز" },
+  { id: "ZOe088cCC94", category: "motion", title: "اعلان لشركة ECN" },
+  { id: "J_lJzzEKgJE", category: "motion", title: "اعلان لشركة Premium Target" },
+  { id: "Q-mWHjpIhcU", category: "motion", title: "اعلان لفندق فلاش لايت" },
   { id: "mBZqKUAaj0g", category: "ads", also: ["motion"], title: "برومو التطوير المتميز" },
-  reel("3sE9Iyd7JwY", "motion", "عجلة بلاكو", { also: ["ads"] }),
-  reel("OeoDL0KKH_s", "motion", "مجموعة يوغا البنفسجية — Acnoria Care", { also: ["ads"] }),
-  reel("GwszVA3x3nY", "motion", "اعلان العسل — Acnoria Care", { also: ["ads"] }),
-  reel("-lMZl1TwsO0", "motion", "المنتجات الطبية", { also: ["ads"] }),
-  reel("ExHYLtCgzSg", "motion", "اعلان الخصم 25%", { also: ["ads"] }),
-  reel("eANXAn6VO1g", "motion", "قسم المكياج", { also: ["ads"] }),
-  reel("l-6PeYXlsp4", "motion", "قسم العدسات", { also: ["ads"] }),
-  reel("EYU4sIgKYpE", "motion", "قسم كبار السن", { also: ["ads"] }),
-  reel("VENgORT1LBk", "motion", "قسم الرياضة والرشاقة", { also: ["ads"] }),
-  reel("c4M29gege9U", "motion", "واقي الشمس", { also: ["ads"] }),
+  reel("3sE9Iyd7JwY", "motion", "عجلة بلاكو"),
+  reel("OeoDL0KKH_s", "motion", "مجموعة يوغا البنفسجية — Acnoria Care"),
+  reel("GwszVA3x3nY", "motion", "اعلان العسل — Acnoria Care"),
+  reel("-lMZl1TwsO0", "motion", "المنتجات الطبية"),
+  reel("ExHYLtCgzSg", "motion", "اعلان الخصم 25%"),
+  reel("eANXAn6VO1g", "motion", "قسم المكياج"),
+  reel("l-6PeYXlsp4", "motion", "قسم العدسات"),
+  reel("EYU4sIgKYpE", "motion", "قسم كبار السن"),
+  reel("VENgORT1LBk", "motion", "قسم الرياضة والرشاقة"),
+  reel("c4M29gege9U", "motion", "واقي الشمس"),
 
   // Ads & promos (filmed)
   { id: "5vKHhC1jKPA", category: "ads", title: "Demo promo for a wood factory" },
@@ -132,6 +213,7 @@ export const VIDEOS: Video[] = [
     also: ["beforeAfter"],
     title: { ar: "أبو نوح للعقارات — أرض الصناعة", en: "Abu Nouh Real Estate — Industrial land" },
     date: FINISHED["ard-alsinaa"],
+    final: finalOf("ard-alsinaa"),
     vertical: true,
     youtube: false,
     poster: "/videos/ard-alsinaa/poster.jpg",
@@ -144,8 +226,8 @@ export const VIDEOS: Video[] = [
   beforeAfter("oraija", "realEstate", { ar: "حي العريجاء", en: "Al-Uraija district" }),
 
   // AI videos — a vertical one gets `vertical: true`.
-  beforeAfter("mlml-trailer", "ai", { ar: "الململ — تريلر", en: "Al-Malmal — Trailer" }),
-  beforeAfter("mlml-part2", "ai", { ar: "الململ — ملخص الجزء 2", en: "Al-Malmal — Part 2 recap" }),
+  beforeAfter("mlml-trailer", "ai", { ar: "الململ — رواية خالد السدّاني (تريلر)", en: "Al-Malmal by Khalid Al-Saddani — Trailer" }),
+  beforeAfter("mlml-part2", "ai", { ar: "الململ — رواية خالد السدّاني (ملخص الجزء 2)", en: "Al-Malmal by Khalid Al-Saddani — Part 2 recap" }),
 
   // Documentary montage (ReLevant History & Heritage)
   { id: "P1uClg_dAus", category: "documentary", title: "The Ancient Peoples of Palestine" },
@@ -163,7 +245,7 @@ export const VIDEOS: Video[] = [
   reel("ILTcUOf3cYg", "content", "العلاقة مع الله — ياسر الحزيمي"),
   reel("3vvGkkOu6Fs", "content", "المحفظة المتنوعة"),
   beforeAfter("laith-investor", "content", { ar: "الكوتش ليث — التداول", en: "Coach Laith — Trading" }),
-  beforeAfter("mubasher-trading", "content", { ar: "مباشر كابيتال — التداول", en: "Mubasher Capital — Trading" }, ["ads"]),
+  beforeAfter("mubasher-trading", "ads", { ar: "مباشر كابيتال — التداول", en: "Mubasher Capital — Trading" }),
   beforeAfter("mohammad-re-1", "content", { ar: "Sovereign Capital — ريل 1", en: "Sovereign Capital — Reel 1" }),
   beforeAfter("mohammad-re-2", "content", { ar: "Sovereign Capital — ريل 2", en: "Sovereign Capital — Reel 2" }),
   beforeAfter("mohammad-re-3", "content", { ar: "Sovereign Capital — ريل 3", en: "Sovereign Capital — Reel 3" }),
@@ -230,7 +312,23 @@ function pinnedFirst(videos: Video[], filter: VideoFilter): Video[] {
   return [...pinned, ...videos.filter((v) => !pinned.includes(v))];
 }
 
+/**
+ * How a video appears under a tab: the before/after tab shows the before/after version
+ * (composite or slider); every other place shows the clean final when there is one.
+ */
+function shownUnder(filter: VideoFilter) {
+  return (video: Video): Video => {
+    if (filter === "beforeAfter" || !video.final) return video;
+    const { final } = video;
+    return { ...video, final: undefined, compare: undefined, file: final.file, yt: final.yt, preview: final.preview, poster: final.poster };
+  };
+}
+
 export function getVideosFor(filter: VideoFilter): Video[] {
+  return pickFor(filter).map(shownUnder(filter));
+}
+
+function pickFor(filter: VideoFilter): Video[] {
   if (filter === "all") return pinnedFirst(newestFirst(VIDEOS), filter);
   // Reels: newest first; among the older undated ones, the before/after reels lead as they always have.
   if (filter === "reels") {
@@ -251,7 +349,7 @@ export function getActiveCategories(): VideoCategory[] {
 /** Tabs: categories with videos, the coming-soon ones that are still empty, then "reels". */
 export function getFilters(): VideoFilter[] {
   const categories = VIDEO_CATEGORIES.filter(
-    (c) => VIDEOS.some((v) => inCategory(v, c)) || COMING_SOON_CATEGORIES.includes(c),
+    (c) => !HIDDEN_TABS.includes(c) && (VIDEOS.some((v) => inCategory(v, c)) || COMING_SOON_CATEGORIES.includes(c)),
   );
   const reels: VideoFilter[] = VIDEOS.some(isVertical) ? ["reels"] : [];
   return ["all", ...categories, ...reels];
@@ -282,6 +380,7 @@ export function getEmbedUrl(id: string): string {
 }
 
 export function getWatchUrl(video: Video): string {
+  if (video.yt) return `https://www.youtube.com/shorts/${video.yt}`;
   return isVertical(video)
     ? `https://www.youtube.com/shorts/${video.id}`
     : `https://www.youtube.com/watch?v=${video.id}`;

@@ -15,6 +15,7 @@ import {
   COMING_SOON_CATEGORIES,
   VIDEO_CATEGORIES,
   VIDEOS,
+  HIDDEN_TABS,
 } from "./videos";
 import { routing } from "@/i18n/routing";
 
@@ -30,13 +31,17 @@ describe("videos", () => {
     }
   });
 
+  it("uses well-formed ids for the unlisted YouTube copies", () => {
+    for (const v of VIDEOS) for (const id of [v.yt, v.final?.yt]) if (id) expect(id).toMatch(/^[A-Za-z0-9_-]{11}$/);
+  });
+
   it("gives site-only videos a poster, and every local file exists", () => {
     for (const v of VIDEOS) {
       if (!isOnYoutube(v)) {
         expect(v.poster, v.id).toBeTruthy();
-        expect(Boolean(v.file || v.compare), `${v.id} has nothing to play`).toBe(true);
+        expect(Boolean(v.file || v.yt || v.compare), `${v.id} has nothing to play`).toBe(true);
       }
-      for (const file of [v.poster, v.preview, v.file, v.compare?.before, v.compare?.after]) {
+      for (const file of [v.poster, v.preview, v.file, v.compare?.before, v.compare?.after, v.final?.file, v.final?.preview, v.final?.poster]) {
         if (file?.startsWith("/")) expect(existsSync(join("public", file)), file).toBe(true);
       }
     }
@@ -54,7 +59,10 @@ describe("videos", () => {
     const filters = getFilters();
     expect(filters[0]).toBe("all");
     for (const category of COMING_SOON_CATEGORIES) expect(filters).toContain(category);
-    for (const category of getActiveCategories()) expect(filters).toContain(category);
+    for (const category of getActiveCategories()) {
+      if (HIDDEN_TABS.includes(category)) expect(filters).not.toContain(category);
+      else expect(filters).toContain(category);
+    }
     expect(filters.at(-1)).toBe("reels");
   });
 
@@ -84,5 +92,17 @@ describe("videos", () => {
 
   it("only features videos that exist", () => {
     expect(getFeaturedVideos().map((v) => v.id)).toEqual(FEATURED_VIDEO_IDS);
+  });
+
+  it("keeps motion graphics out of the ads tab", () => {
+    expect(getVideosFor("ads").filter((v) => v.category === "motion")).toEqual([]);
+  });
+
+  it("shows the clean final everywhere but the before/after tab", () => {
+    for (const v of VIDEOS.filter((x) => x.final)) {
+      const play = (x?: { file?: string; yt?: string }) => x?.yt ?? x?.file;
+      expect(play(getVideosFor("beforeAfter").find((x) => x.id === v.id))).not.toBe(play(v.final));
+      expect(play(getVideosFor("reels").find((x) => x.id === v.id))).toBe(play(v.final));
+    }
   });
 });
