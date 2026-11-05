@@ -33,7 +33,7 @@ export function PageHero({
           {title}
         </h1>
         <p
-          className="rise-in text-muted text-base md:text-lg leading-relaxed max-w-[700px]"
+          className="rise-in text-lead text-muted text-base md:text-lg leading-relaxed max-w-[700px]"
           style={riseDelay(2)}
         >
           {description}

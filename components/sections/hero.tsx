@@ -36,7 +36,7 @@ export function Hero() {
             {t("headlineLine2")}<br />
             {t("headlineLine3")}
           </h1>
-          <p className="rise-in text-white/70 text-base md:text-lg leading-[1.8] max-w-[560px]" style={riseDelay(2)}>
+          <p className="rise-in text-lead text-white/70 text-base md:text-lg leading-[1.8] max-w-[560px]" style={riseDelay(2)}>
             {t("description")}
           </p>
           <div className="rise-in flex flex-wrap gap-3 mt-2" style={riseDelay(3)}>

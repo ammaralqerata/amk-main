@@ -29,7 +29,7 @@
 /* Locale-aware font selection. --font-arabic and --font-latin are both injected
    on <html> by the Next.js font loader; we pick the right one based on lang. */
 html[lang="ar"] {
-  --font-active: var(--font-arabic), "Readex Pro", ui-sans-serif, system-ui, sans-serif;
+  --font-active: var(--font-arabic), "Thmanyah Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
 html[lang="en"] {
@@ -49,6 +49,20 @@ html, body {
   font-weight: 600;
   letter-spacing: -0.01em;
 }
+
+/* Arabic: Thmanyah. Letter-spacing breaks Arabic joining and the kashida, so it is off.
+   Unlayered rules win over Tailwind's layered utilities. */
+html[lang="ar"] .font-display { font-weight: 700; letter-spacing: 0; }
+html[lang="ar"] [class*="tracking-"] { letter-spacing: 0; }
+html[lang="ar"] h1.font-display,
+html[lang="ar"] h2.font-display {
+  font-family: var(--font-arabic-display), var(--font-arabic), serif;
+  line-height: 1.35;
+}
+html[lang="ar"] h1.font-display { font-weight: 900; }
+html[lang="ar"] h2.font-display { font-weight: 700; }
+html[lang="ar"] .ui-medium { font-weight: 500; }
+html[lang="ar"] .text-lead { font-weight: 300; }
 
 /* Entrance animation for above-the-fold content. Pure CSS so the first screen
    is painted (and animates) before JavaScript loads. Stagger with --i. */

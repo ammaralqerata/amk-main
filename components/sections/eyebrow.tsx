@@ -11,7 +11,7 @@ export function Eyebrow({ children, tone = "light", className, icon }: {
     <div className={cn("inline-flex items-center gap-1.5", tone === "light" && "[--color-accent:var(--color-accent-ink)]", className)}>
       {icon}
       <span className={cn(
-        "font-display text-[11px] tracking-[0.18em] uppercase",
+        "ui-medium font-display text-[11px] tracking-[0.18em] uppercase",
         tone === "light" ? "text-muted" : "text-muted"
       )}>
         {children}

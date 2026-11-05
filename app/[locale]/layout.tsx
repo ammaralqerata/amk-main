@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import { Geist, Geist_Mono, Readex_Pro } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import "../globals.css";
@@ -24,9 +25,26 @@ const fontMono = Geist_Mono({
   display: "swap",
 });
 
-const fontArabic = Readex_Pro({
-  subsets: ["arabic", "latin"],
+// Thmanyah (خط ثمانية): Sans for text and UI, Serif Display for big headings.
+const fontArabic = localFont({
+  src: [
+    { path: "../fonts/thmanyah/thmanyahsans-Light.woff2", weight: "300", style: "normal" },
+    { path: "../fonts/thmanyah/thmanyahsans-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/thmanyah/thmanyahsans-Medium.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/thmanyah/thmanyahsans-Bold.woff2", weight: "700", style: "normal" },
+    { path: "../fonts/thmanyah/thmanyahsans-Black.woff2", weight: "900", style: "normal" },
+  ],
   variable: "--font-arabic",
+  display: "swap",
+});
+
+const fontArabicDisplay = localFont({
+  src: [
+    { path: "../fonts/thmanyah/thmanyahserifdisplay-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/thmanyah/thmanyahserifdisplay-Bold.woff2", weight: "700", style: "normal" },
+    { path: "../fonts/thmanyah/thmanyahserifdisplay-Black.woff2", weight: "900", style: "normal" },
+  ],
+  variable: "--font-arabic-display",
   display: "swap",
 });
 
@@ -82,7 +100,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={dir}
-      className={`${fontLatin.variable} ${fontMono.variable} ${fontArabic.variable}`}
+      className={`${fontLatin.variable} ${fontMono.variable} ${fontArabic.variable} ${fontArabicDisplay.variable}`}
     >
       <body>
         <NextIntlClientProvider>
