@@ -3,7 +3,7 @@ import { routing, type Locale } from "@/i18n/routing";
 
 export const SITE_URL = "https://ammar.kerata.net";
 export const SITE_NAME = "AMK Creative";
-const OG_IMAGE = { url: "/og-image-v1.png", width: 1200, height: 630 };
+const OG_IMAGE = { url: "/og-image-v2.png", width: 1200, height: 630 };
 
 /** "/portfolio" → "/portfolio" for Arabic (default, no prefix) or "/en/portfolio" for English. */
 export function localizedPath(locale: Locale, path: string): string {
